@@ -56,19 +56,20 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>EC12F5FE55385DAA3BC5B53B3DE9FB75E673EA59</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9580BD67D3BBAFD9584A601E51FA4C14794D8D8C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>Cloaks+_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Cloaks+_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.1.278, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
@@ -143,7 +144,6 @@
     </EmbeddedResource>
     <Resource Include="Kiona-Regular.ttf" />
     <None Include="app.manifest" />
-    <None Include="Cloaks+_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -154,19 +154,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Cloaks.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="taz..png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="lin.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="home.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="purson.png" />
+    <Resource Include="people.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="settings.png" />
@@ -175,40 +169,22 @@
     <Resource Include="folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="mk.png" />
+    <Resource Include="cloaksplus.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="CloaksPlusImage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="DownloadImage.png" />
+    <Resource Include="download.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="discordlogo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="20-200938_white-discord-logo-png-png-free-discord-logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="discord-logo-png-7622.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="lessgoooo.png" />
+    <Resource Include="trash.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="transparent.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="noclouds.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="newcloakscircle.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="noclouds.ico" />
+    <Resource Include="circle.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="c_favicon.ico" />

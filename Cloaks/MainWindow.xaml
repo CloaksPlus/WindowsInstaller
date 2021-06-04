@@ -98,13 +98,13 @@
                                     <RowDefinition Height="15*"/>
                                     <RowDefinition Height="2*"/>
                                 </Grid.RowDefinitions>
-                                <Image x:Name="dlimage2" Source="DownloadImage.png" Margin="-24,4,135,2"/>
+                                <Image x:Name="dlimage2" Source="download.png" Margin="-24,4,135,2"/>
                                 <Label Content="Install Cloaks+" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="-5,2,-8,0" FontSize="15" Height="31" Grid.RowSpan="2"/>
                             </Grid>
                         </Button>
                         <Button x:Name="UninstallClickButton" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="187" FontFamily="/Cloaks;component/#Kiona" Margin="168,210,0,136" Click="UninstallButton_Click" FontSize="16" Panel.ZIndex="2">
                             <Grid>
-                                <Image x:Name="CloaksPlusImageLogo" Source="lessgoooo.png" Margin="-22,4,137,6"/>
+                                <Image x:Name="CloaksPlusImageLogo" Source="trash.png" Margin="-22,4,137,6"/>
                                 <Label Content="Uninstall Cloaks+" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="1,2,-14,1" FontSize="15"/>
                             </Grid>
                         </Button>
@@ -168,13 +168,13 @@
                 </Button>
                 <Button x:Name="InstallButtonSide" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="121" FontFamily="/Cloaks;component/#Kiona" Margin="13,121,0,186" Height="28" Click="InstallFrame_Click" FontSize="16">
                     <Grid>
-                        <Image x:Name="dlimage" Source="DownloadImage.png" Margin="7,1,93,2"/>
-                        <Label Content="Install" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="27,-3,10,0" FontSize="15" Height="26"/>
+                        <Image x:Name="dlimage" Source="download.png" Margin="7,1,93,2"/>
+                        <Label Content="Install" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="0,-3,10,0" FontSize="15" Height="26" HorizontalAlignment="Right" Width="78"/>
                     </Grid>
                 </Button>
                 <Button x:Name="CreditsButtonSide" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="121" FontFamily="/Cloaks;component/#Kiona" Margin="13,154,0,153" Height="28" Click="CreditsFrame_Click" FontSize="16">
                     <Grid>
-                        <Image x:Name="GroupImageSide" Source="purson.png" Margin="7,1,93,2"/>
+                        <Image x:Name="GroupImageSide" Source="people.png" Margin="7,1,93,2"/>
                         <Label Content="Credits" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="27,-3,10,0" FontSize="15" Height="26"/>
                     </Grid>
                 </Button>
