@@ -139,6 +139,10 @@ namespace Cloaks
                 ObjectShift(HomeFrame, HomeFrame.Margin, new Thickness(101, 0, 199, 230));
                 await Task.Delay(1000);
                 Application.Current.Shutdown();
+                await Task.Delay(1000);
+                System.Windows.Forms.Application.Exit();
+                await Task.Delay(1000);
+                System.Windows.Forms.Application.ExitThread();
             }
         }
 
