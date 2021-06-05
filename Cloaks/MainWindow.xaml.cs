@@ -113,17 +113,6 @@ namespace Cloaks
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
         private async void ExitButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (Mouse.LeftButton == MouseButtonState.Pressed)
@@ -141,10 +130,6 @@ namespace Cloaks
                 Application.Current.Shutdown();
             }
         }
-
-
-
-
 
         private void HomeFrame_Click(object sender, RoutedEventArgs e)
         {
