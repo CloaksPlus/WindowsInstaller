@@ -1,6 +1,8 @@
 # NewInstaller
 New installer for Cloaks+
 
+Made by seizure salad#3820 and zuhn.#1337
+
 Last updated on 6/8/2021
 
 # Changelog
