@@ -8,6 +8,9 @@ using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Shell;
 //LOOK NO MORE 32894729739287298174908 USING STATEMENTS! WOW!
+//le install code and stuff was made by yours truly made it handle exeptions 
+//maybeeee change zuhn's ui in the future?? idk people might get mad at it if you know what i mean
+//- seizure salad#3820
 
 namespace Cloaks
 {
@@ -95,6 +98,7 @@ namespace Cloaks
         private void TopBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
             //what is this drag code  h u h
+            //just do this.DragMove(); xd
             if (Mouse.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
@@ -133,6 +137,7 @@ namespace Cloaks
 
         private void InstallButton_Click(object sender, RoutedEventArgs e)
         {
+        //ah yes, seizure's epic god teir code at it's finest
             try
             {
                 string contents = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
@@ -148,19 +153,22 @@ namespace Cloaks
                     {
                         this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Indeterminate;
                         hosts.WriteLine("\n159.203.120.188 s.optifine.net\n# THE LINE ABOVE WAS INSERTED BY CLOAKS+");
+                        //seizure was here welcome to the efficient not spaghetti code section i'll show you around
                         this.Activate();
                         MessageBox.Show("Cloaks+ successfully installed!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                        //bruv imagine skidding 
                     }
                 }
             }
-            catch (IOException shittyVariableName)
+            //EXECPTION HANDLING!!! YAY!!!
+            catch (IOException shittyVariableName) //I AM GOD AT NAMING VARIABLES
             {
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
                 MessageBox.Show(shittyVariableName.Message, "Cloaks+ Error!| Please send this to the suport channel in the Discord server!", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
             }
-            catch (Exception bruvIdkHowToSpellExecption)
+            catch (Exception bruvIdkHowToSpellExecption) //ebic variable names lmao
             {
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
                 MessageBox.Show(bruvIdkHowToSpellExecption.Message, "Cloaks+ Error!| Please send this to the suport channel in the Discord server!", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -198,6 +206,7 @@ namespace Cloaks
                     MessageBox.Show("Cloaks+ not detected!", "Cloaks+ Uninstaller", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+            //even more ebic exeption handling
             catch (IOException IOError)
             {
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
@@ -219,6 +228,7 @@ namespace Cloaks
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+        //made it a button instead of a border to exit lol
             FadeOut(MainBorder);
             FadeOut(TopBorder);
             FadeOut(SelectFrame);
@@ -238,7 +248,7 @@ namespace Cloaks
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized; //good zuhn code moment
         }
     }
     }
