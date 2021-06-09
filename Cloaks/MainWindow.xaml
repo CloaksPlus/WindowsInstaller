@@ -1,0 +1,191 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cloaks"
+        x:Class="Cloaks.MainWindow"
+        mc:Ignorable="d"
+   Title="Cloaks+" Topmost="True" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" BorderThickness="0" Background="Transparent" Height="446.995" Width="718.087" Loaded="Cloaks_Loaded">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="taskBarItemInfo1" 
+                     ThumbnailClipMargin="80,0,80,140"
+                     Description="your mom xDDD :rofl::rofl:">
+        </TaskbarItemInfo>
+    </Window.TaskbarItemInfo>
+    <Window.Resources>
+        <SolidColorBrush
+            Color="#191919"
+            x:Key="ListBox.Static.Background" />
+
+
+        <Style
+            TargetType="{x:Type ListBox}"
+            x:Key="ListBox">
+            <Setter
+                Property="Background"
+                Value="{StaticResource ListBox.Static.Background}" />
+            <Setter
+                Property="BorderThickness"
+                Value="0" />
+            <Setter
+                Property="Foreground"
+                Value="#FFFFFFFF" />
+            <Setter
+                Property="ScrollViewer.PanningMode"
+                Value="Both" />
+            <Setter
+                Property="Stylus.IsFlicksEnabled"
+                Value="False" />
+            <Setter
+                Property="VerticalContentAlignment"
+                Value="Center" />
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate
+                        TargetType="{x:Type ListBox}">
+                        <Border
+                            x:Name="Bd"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Background="{TemplateBinding Background}"
+                            Padding="1"
+                            SnapsToDevicePixels="True">
+                            <ScrollViewer
+                                Focusable="False"
+                                Padding="{TemplateBinding Padding}">
+                                <ItemsPresenter
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition
+                                        Property="IsGrouping"
+                                        Value="True" />
+                                    <Condition
+                                        Property="VirtualizingPanel.IsVirtualizingWhenGrouping"
+                                        Value="False" />
+                                </MultiTrigger.Conditions>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="239*"/>
+            <RowDefinition Height="208*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="127*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Border x:Name="MainBorder" BorderThickness="0" HorizontalAlignment="Center" Height="382" Margin="34,42,4,23" VerticalAlignment="Center" Width="642" Background="#FF151515" CornerRadius="5" Grid.RowSpan="2">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0"/>
+            </Border.Effect>
+            <Grid>
+
+                <Border x:Name="InstallFrame" CornerRadius="2.5,2.5,0,0" Background="#FF141414" HorizontalAlignment="Left" Height="382" Margin="122,0,0,0" VerticalAlignment="Center" Width="520" BorderThickness="0" Opacity="0" Visibility="Collapsed">
+                    <Grid>
+                        <Image Source="transparent.png" Margin="208,30,204,252" Panel.ZIndex="0"/>
+                        <Label x:Name="InstallLabelMain" FontFamily="/Cloaks+;component/#Kiona" Content="Cloaks+ Installation" Foreground="White" Margin="140,121,134,225" FontSize="20" Panel.ZIndex="0"/>
+                        <Label x:Name="TermsLabelMain" FontFamily="/Cloaks+;component/#Kiona" Content="By installing Cloaks+ you agree to the Terms of Cloaks." Foreground="White" Margin="73,251,53,90" Panel.ZIndex="0"/>
+                        <Label x:Name="Useatyourownriskmainlabel" FontFamily="/Cloaks+;component/#Kiona" Content="Cloaks plus is 'use at your own risk' with any third party Minecraft client." Foreground="White" Margin="36,313,-1,28" Panel.ZIndex="0" FontSize="11.25"/>
+                        <Image x:Name="Line1" Source="lin.png" Margin="111,75,118,225" Panel.ZIndex="0"/>
+                        <Button x:Name="UninstallButton1" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="187" FontFamily="/Cloaks;component/#Kiona" Margin="168,161,0,185" Click="InstallButton_Click" FontSize="16">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="15*"/>
+                                    <RowDefinition Height="2*"/>
+                                </Grid.RowDefinitions>
+                                <Image x:Name="dlimage2" Source="download.png" Margin="-24,4,135,2"/>
+                                <Label Content="Install Cloaks+" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="-5,2,-8,0" FontSize="15" Height="31" Grid.RowSpan="2"/>
+                            </Grid>
+                        </Button>
+                        <Button x:Name="UninstallClickButton" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="187" FontFamily="/Cloaks;component/#Kiona" Margin="168,210,0,136" Click="UninstallButton_Click" FontSize="16" Panel.ZIndex="2">
+                            <Grid>
+                                <Image x:Name="CloaksPlusImageLogo" Source="trash.png" Margin="-22,4,137,6"/>
+                                <Label Content="Uninstall Cloaks+" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="1,2,-14,1" FontSize="15"/>
+                            </Grid>
+                        </Button>
+                        <Button x:Name="eulaopen" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="73" FontFamily="/Cloaks;component/#Kiona" Margin="224,283,0,69" Click="EulaButton_Click" FontSize="16" Panel.ZIndex="2">
+                            <Grid>
+
+                                <Label Content="eula" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="-7,-3,-6,2" FontSize="15"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+
+                </Border>
+                <Border x:Name="CreditsFrame" CornerRadius="2.5,2.5,0,0" Background="#FF141414" HorizontalAlignment="Left" Height="382" Margin="122,0,0,0" VerticalAlignment="Center" Width="520" BorderThickness="0" Visibility="Collapsed" Opacity="0">
+                    <Grid>
+                        <Image Source="transparent.png" Margin="217,2,192,239"/>
+                        <Label x:Name="CloaksPlusLabelCredits" FontFamily="/Cloaks+;component/#Kiona" Content="Cloaks+" Foreground="White" Margin="213,102,197,239" FontSize="23"/>
+                        <Image x:Name="LineCredits" Source="lin.png" Margin="147,86,134,165"/>
+                        <Label x:Name="CreditDeveloper1" FontFamily="/Cloaks+;component/#Kiona" Content="• Cloaks+ Installer made by zuhn.#1337 and seizure&#xA;" Foreground="#bdbdbd" Margin="75,164,10,183" FontSize="15"/>
+                        <Label x:Name="CreditDeveloper2" FontFamily="/Cloaks+;component/#Kiona" Content="• backend was developed by Medusa and Boyne" Foreground="#bdbdbd" Margin="88,195,31,156" FontSize="15"/>
+                        <Label x:Name="CreditDeveloper3" FontFamily="/Cloaks+;component/#Kiona" Content="• Cloaks+ Graphics and logos were made by atlas" Foreground="#bdbdbd" Margin="71,225,22,126" FontSize="15"/>
+                        <Label x:Name="CreditDeveloper4" FontFamily="/Cloaks+;component/#Kiona" Content="• Special thanks to our staff team" Foreground="#bdbdbd" Margin="117,251,87,100" FontSize="15"/>
+                        <Label x:Name="CreditDeveloper5" FontFamily="/Cloaks+;component/#Kiona" Content="for keeping the server up and running :D" Foreground="#bdbdbd" Margin="101,279,60,72" FontSize="15"/>
+                    </Grid>
+                </Border>
+
+
+
+                <Border x:Name="TopBorder" BorderThickness="2" HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="646" Background="#FF1C1C1C" CornerRadius="5,5,0,0" MouseDown="TopBorder_MouseDown" Margin="-2, -40, -2, 0" Grid.ColumnSpan="3">
+                    <Grid Margin="-1,-1,1,1">
+
+
+                        <Label x:Name="TopBorderCloaksMainLabel" FontFamily="/Cloaks+;component/#Kiona" Content="Cloaks+" Foreground="White" Margin="267,0,283,-3" FontSize="16"/>
+                        <Image x:Name="Logo" Source="transparent.png" Margin="1,0,611,1"/>
+                        <Button Content="&#xE711;" FontSize="15" Style="{DynamicResource HoverButton}" FontFamily="Segoe MDL2 Assets" Background="Transparent" Foreground="WhiteSmoke" HorizontalAlignment="Left" Height="28" Margin="612,0,0,0" BorderThickness="0" VerticalAlignment="Top" Width="30" Click="Button_Click"/>
+                        <Button Content="&#xE738;" FontSize="15" Style="{DynamicResource HoverButton}" FontFamily="Segoe MDL2 Assets" Background="Transparent" Foreground="WhiteSmoke" HorizontalAlignment="Left" Height="28" Margin="577,0,0,0" BorderThickness="0" VerticalAlignment="Top" Width="30" Click="Button_Click_1"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        <Border x:Name="HomeFrame" Background="{x:Null}" Margin="549,63,-376,35" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Grid>
+                <Image Source="transparent.png" Margin="195,0,205,230"/>
+                <Label x:Name="MainTextLabelHome" FontFamily="/Cloaks+;component/#Kiona" Content="Cloaks+" Foreground="White" Margin="227,102,190,209" FontSize="23"/>
+                <Label x:Name="MadeByMainHome" FontFamily="Consolas" Content="Made by zuhn.#1337 and seizure" Foreground="#bdbdbd" Margin="158,134,147,191" FontSize="14"/>
+                <Image x:Name="Line3" Source="lin.png" Margin="121,59,127,75"/>
+                <Label x:Name="Changelog2" FontFamily="/Cloaks+;component/#Kiona" Content="• Fixed up some useless code&#xD;&#xA;" Foreground="#bdbdbd" Margin="116,177,77,134" FontSize="15"/>
+                <Label x:Name="Changelog3" FontFamily="/Cloaks+;component/#Kiona" Content="• Current version is v.1.1" Foreground="#bdbdbd" Margin="172,207,127,104" FontSize="15"/>
+            </Grid>
+        </Border>
+        <Border x:Name="SelectFrame" CornerRadius="2.5,2.5,0,0" Background="#FF1C1C1C" HorizontalAlignment="Left" Height="335" Margin="-90,92,0,20" VerticalAlignment="Center" Width="148" Grid.RowSpan="2">
+            <Grid>
+                <Image x:Name="SideBarCloaksLogo" Source="transparent.png" Margin="51,2,50,294"/>
+                <Label x:Name="MenuLabel" FontFamily="/Cloaks+;component/#Kiona" Content="Cloaks+" Foreground="White" Margin="30,41,10,262" FontSize="18"/>
+                <Image x:Name="line4" Source="lin.png" Margin="1,30,0,219"/>
+                <Label Content="Cloaks+ v.1.1" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="3,314,0,0" FontSize="9" RenderTransformOrigin="0.5,0.5" Width="124"/>
+                <Button x:Name="SideHomButton" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="121" FontFamily="/Cloaks;component/#Kiona" Margin="13,88,0,219" Height="28" Click="HomeFrame_Click" FontSize="16">
+                    <Grid>
+                        <Image x:Name="HomeImage" Source="home.png" Margin="7,1,93,2"/>
+                        <Label Content="home" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="27,-3,39,0" FontSize="15" Height="26"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="InstallButtonSide" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="121" FontFamily="/Cloaks;component/#Kiona" Margin="13,121,0,186" Height="28" Click="InstallFrame_Click" FontSize="16">
+                    <Grid>
+                        <Image x:Name="dlimage" Source="download.png" Margin="7,1,93,2"/>
+                        <Label Content="Install" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="0,-3,10,0" FontSize="15" Height="26" HorizontalAlignment="Right" Width="78"/>
+                    </Grid>
+                </Button>
+                <Button x:Name="CreditsButtonSide" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="121" FontFamily="/Cloaks;component/#Kiona" Margin="13,154,0,153" Height="28" Click="CreditsFrame_Click" FontSize="16">
+                    <Grid>
+                        <Image x:Name="GroupImageSide" Source="people.png" Margin="7,1,93,2"/>
+                        <Label Content="Credits" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Kiona" Margin="27,-3,10,0" FontSize="15" Height="26"/>
+                    </Grid>
+                </Button>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>
