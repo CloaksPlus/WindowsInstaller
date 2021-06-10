@@ -1,6 +1,6 @@
 # Cloaks Plus Installer Terms of Use
 
-This code is provided publicy for review but is stricty provided with ***All Rights Reserved***. You cannot modify or redistribute this code without ***explicit*** permission from a developer or high ranking staff member of Cloaks Plus (e.g. a Administrator, Head Administrator, Official Representative, or Owner).
+This code is provided publicy for review but is stricty provided with ***All Rights Reserved***. You cannot modify or redistribute this code without ***explicit*** permission from a developer or high ranking staff member of Cloaks Plus (e.g. an Official Representative or Owner).
 
 ## Contribution
 
