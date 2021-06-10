@@ -1,7 +1,7 @@
 # NewInstaller
 New installer for Cloaks+
 
-Made by seizure salad#3820 and zuhn.#1337
+Made by `zuhn.#1337`, `seizure salad#3820`, and `Wowkster#0001`
 
 Last updated on 6/8/2021
 
