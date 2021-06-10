@@ -486,7 +486,7 @@ namespace Cloaks {
             case 25:
             
             #line 147 "..\..\MainWindow.xaml"
-            ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.Button_Click);
+            ((System.Windows.Controls.Button)(target)).Click += new System.Windows.RoutedEventHandler(this.CloseButton_Click);
             
             #line default
             #line hidden
