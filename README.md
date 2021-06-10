@@ -6,10 +6,9 @@ Made by `zuhn.#1337`, `seizure salad#3820`, and `Wowkster#0001`
 Last updated on 6/8/2021
 
 ## Changelog
-- handeled exceptions
-- got rid of the useless using statements
-- added a comment for people who wanna manually uninstall
-- added taskbariteminfo thingy lol
+- Handled Exceptions
+- Got rid of the useless using statements
+- Added a comment for people who want to manually uninstall Cloaks+
 
 ## Contributing
 
