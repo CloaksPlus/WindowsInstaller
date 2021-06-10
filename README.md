@@ -13,4 +13,8 @@ Last updated on 6/8/2021
 
 ## Contributing
 
-As stated in the Terms of Use, please contact a Cloaks Plus developer is order to contribute to this repository.
+As stated in the [Terms of Use](https://github.com/CloaksPlus/NewInstaller/blob/master/TOU.md), please contact a Cloaks Plus developer is order to contribute to this repository.
+
+## License
+
+This repository is provided without an Open Source License on purpose (not an oversight). The code is public, but is under exclusive copyright by Cloaks Plus and ***All Right are Reserved by Cloaks Plus***. No permission is granted to use, modify, or share the provided code under any circumstance without explicit permission from a Cloaks Plus developer. To learn more about a "No Licesne" repository, see this page https://choosealicense.com/no-permission/ from *Choose a License*.
