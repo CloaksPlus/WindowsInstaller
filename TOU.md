@@ -4,7 +4,7 @@ This code is provided publicy for review but is stricty provided with ***All Rig
 
 ## Contribution
 
-If you would like to contribute to this repository, you must obtain permision from a developer or high ranking staff member of Cloaks Plus (e.g. a Administrator, Head Administrator, Official Representative, or Owner) and you must follow the explicit instructions provided by them.
+If you would like to contribute to this repository, you must obtain permision from a developer of Cloaks Plus and you must follow the explicit instructions provided by them.
 
 ## Redistribution
 
