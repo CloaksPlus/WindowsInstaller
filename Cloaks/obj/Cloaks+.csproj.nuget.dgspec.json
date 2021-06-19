@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\maxzl\\source\\repos\\NewInstaller\\Cloaks\\Cloaks+.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\maxzl\\source\\repos\\NewInstaller\\Cloaks\\Cloaks+.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\maxzl\\source\\repos\\NewInstaller\\Cloaks\\Cloaks+.csproj",
+        "projectName": "Cloaks+",
+        "projectPath": "C:\\Users\\maxzl\\source\\repos\\NewInstaller\\Cloaks\\Cloaks+.csproj",
+        "packagesPath": "C:\\Users\\maxzl\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maxzl\\source\\repos\\NewInstaller\\Cloaks\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "C:\\Users\\maxzl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "Microsoft.Windows.SDK.Contracts": {
+              "target": "Package",
+              "version": "[10.0.18362.2005, )"
+            },
+            "System.ValueTuple": {
+              "target": "Package",
+              "version": "[4.5.0, )"
+            }
+          },
+          "imports": [
+            "uap10.0.18362"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

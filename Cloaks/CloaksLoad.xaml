@@ -7,8 +7,8 @@
         mc:Ignorable="d"
 Title="Cloaks+" Topmost="True" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" BorderThickness="0" Background="Transparent" Height="400" Width="670" Loaded="Cloaks_Loaded">
     <Grid>
-        <Image x:Name="CloaksBG" HorizontalAlignment="Center" Height="190" Margin="236,210,236,0" VerticalAlignment="Center" Width="198" Source="circle.png"/>
-        <Image x:Name="CloaksText" HorizontalAlignment="Center" Height="126" Margin="276,53,280,221" VerticalAlignment="Center" Width="114" Source="transparent.png"/>
+        <Image x:Name="CloaksBG" HorizontalAlignment="Center" Height="190" Margin="236,210,236,0" VerticalAlignment="Center" Width="198" Source="C_background.png"/>
+        <Image x:Name="CloaksText" HorizontalAlignment="Center" Height="150" Margin="260,55,260,195" VerticalAlignment="Center" Width="150" Source="transparent.png"/>
 
     </Grid>
 </Window>

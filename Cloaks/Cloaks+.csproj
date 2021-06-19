@@ -29,6 +29,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>c_favicon.ico</ApplicationIcon>
+    <ApplicationIcon>C.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -72,6 +74,7 @@
     </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="netstandard" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -134,7 +137,10 @@
     </EmbeddedResource>
     <Resource Include="Kiona-Regular.ttf" />
     <None Include="app.manifest" />
-    <None Include="packages.config" />
+    <Resource Include="MinecraftBold-nMK1.otf" />
+    <Resource Include="MinecraftBoldItalic-1y1e.otf" />
+    <Resource Include="MinecraftItalic-R8Mo.otf" />
+    <Resource Include="MinecraftRegular-Bmg3.otf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -190,6 +196,29 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.Contracts">
+      <Version>10.0.18362.2005</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.5.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="C_background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="C_transparenty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="C.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="cloaks3dbanner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="C.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

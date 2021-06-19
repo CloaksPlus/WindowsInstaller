@@ -2,15 +2,14 @@
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Shell;
 //LOOK NO MORE 32894729739287298174908 USING STATEMENTS! WOW!
-//le install code and stuff was made by yours truly made it handle exeptions 
-//maybeeee change zuhn's ui in the future?? idk people might get mad at it if you know what i mean
-//- seizure salad#3820
 
 namespace Cloaks
 {
@@ -19,11 +18,18 @@ namespace Cloaks
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+        public static readonly string version = "1.3";
+        public static readonly string versionLink = "https://raw.githubusercontent.com/SeizureSaladd/vers/main/vers.txt";
+        public static string installerDownload = new WebClient()
+        { Proxy = ((IWebProxy)null) }.DownloadString("https://raw.githubusercontent.com/SeizureSaladd/vers/main/download.txt");
+        
+
 
         Storyboard StoryBoard = new Storyboard();
         TimeSpan duration = TimeSpan.FromMilliseconds(500);
         TimeSpan duration2 = TimeSpan.FromMilliseconds(1000);
-
+        
         private IEasingFunction Smooth
         {
             get;
@@ -80,7 +86,32 @@ namespace Cloaks
 
         public MainWindow()
         {
+            try
+            {
+                string getVersion = new WebClient().DownloadString(versionLink);
+                if (version != getVersion.Trim())
+                {
+                    int num = (int)MessageBox.Show("This version of Cloaks+ is outdated. Please press OK to update.", "Cloaks+ | Update avaliable", MessageBoxButton.OK, MessageBoxImage.Error);
+                    string ok = Path.GetDirectoryName(Directory.GetCurrentDirectory());
+                    if (System.IO.File.Exists(ok + "\\Cloaks+.exe"))
+                        System.IO.File.Delete(ok + "\\Cloaks+.exe");
+                    new WebClient() { Proxy = ((IWebProxy)null) }.DownloadFile(MainWindow.installerDownload, ok + "\\Cloaks+.exe");
+                    ProcessStartInfo startInfo = new ProcessStartInfo(ok + "\\Cloaks+.exe");
+                    startInfo.Verb = "runas";
+                    System.Diagnostics.Process.Start(startInfo);
+                    this.Close();
+                    Environment.Exit(0);
+                }
+            }
+            catch(Exception ohShitWhatNow)
+            {
+                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
+                MessageBox.Show("Cloaks+ has encountered an error trying to update. Please send the error message below to the Discord server.\n\n" + ohShitWhatNow.Message + "\nError source: " + ohShitWhatNow.Source, "Cloaks+ Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+            }
+            //i'm dumb as shit and there's a \n at the end
             InitializeComponent();
+            this.Activate();
         }
 
         private void Cloaks_Loaded(object sender, RoutedEventArgs e)
@@ -93,12 +124,12 @@ namespace Cloaks
             ObjectShift(TopBorder, TopBorder.Margin, new Thickness(-2, -2, -2, 0));
             ObjectShift(SelectFrame, TopBorder.Margin, new Thickness(28, 30.5, 0, 0));
             ObjectShift(HomeFrame, HomeFrame.Margin, new Thickness(124, 63, 19, 35));
+
         }
 
         private void TopBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
             //what is this drag code  h u h
-            //just do this.DragMove(); xd
             if (Mouse.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
@@ -137,41 +168,72 @@ namespace Cloaks
 
         private void InstallButton_Click(object sender, RoutedEventArgs e)
         {
-        //ah yes, seizure's epic god teir code at it's finest
-            try
+            if(chequeBox.IsChecked == true)
             {
-                string contents = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
-                if (contents.Contains("159.203.120.188 s.optifine.net"))
+                try
                 {
-                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                    MessageBox.Show("You already have Cloaks+", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Stop);
-                }
-                else
-                {
-
-                    using (StreamWriter hosts = File.AppendText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "drivers/etc/hosts")))
+                    string oldIP = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
+                    if (oldIP.Contains("159.203.120.188 s.optifine.net"))
                     {
                         this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Indeterminate;
-                        hosts.WriteLine("\n159.203.120.188 s.optifine.net\n# THE LINE ABOVE WAS INSERTED BY CLOAKS+");
-                        //seizure was here welcome to the efficient not spaghetti code section i'll show you around
-                        this.Activate();
-                        MessageBox.Show("Cloaks+ successfully installed!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                        this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
-                        //bruv imagine skidding 
+                        var hosts = "C:\\Windows\\System32\\drivers\\etc\\hosts";
+                        File.WriteAllLines(hosts, File.ReadLines(hosts).Where(l => l != "159.203.120.188 s.optifine.net").ToList());
+                        string aaaaaa = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
+                        if (aaaaaa.Contains("161.35.130.99 s.optifine.net"))
+                        {
+                            this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
+                            MessageBox.Show("You already have Cloaks+", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Stop);
+                        }
+                        else
+                        {
+                            using (StreamWriter bruh = File.AppendText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "drivers/etc/hosts")))
+                            {
+                                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Indeterminate;
+                                bruh.WriteLine("\n161.35.130.99 s.optifine.net\n# THE LINE ABOVE WAS INSERTED BY CLOAKS+");
+                                this.Activate();
+                                MessageBox.Show("Cloaks+ successfully installed!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Information);
+                                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        string contents = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
+                        if (contents.Contains("161.35.130.99 s.optifine.net"))
+                        {
+                            this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
+                            MessageBox.Show("You already have Cloaks+", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Stop);
+                        }
+                        else
+                        {
+                            using (StreamWriter hosts = File.AppendText(System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "drivers/etc/hosts")))
+                            {
+                                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Indeterminate;
+                                hosts.WriteLine("\n161.35.130.99 s.optifine.net\n# THE LINE ABOVE WAS INSERTED BY CLOAKS+");
+                                this.Activate();
+                                MessageBox.Show("Cloaks+ successfully installed!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                            }
+                        }
                     }
                 }
+                catch (IOException shittyVariableName)
+                {
+                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
+                    MessageBox.Show("Cloaks+ has encountered an error. Please send the error message below to the Discord server.\n\n" + shittyVariableName.Message + "\nError source: " + shittyVariableName.Source, "Cloaks+ Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                }
+                catch (Exception bruvIdkHowToSpellExecption)
+                {
+                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
+                    MessageBox.Show("Cloaks+ has encountered an error. Please send the error message below to the Discord server.\n\n" + bruvIdkHowToSpellExecption.Message + "\nError source: " + bruvIdkHowToSpellExecption.Source, "Cloaks+ Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                }
             }
-            //EXECPTION HANDLING!!! YAY!!!
-            catch (IOException shittyVariableName) //I AM GOD AT NAMING VARIABLES
+            else
             {
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                MessageBox.Show(shittyVariableName.Message, "Cloaks+ Error!| Please send this to the suport channel in the Discord server!", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
-            }
-            catch (Exception bruvIdkHowToSpellExecption) //ebic variable names lmao
-            {
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                MessageBox.Show(bruvIdkHowToSpellExecption.Message, "Cloaks+ Error!| Please send this to the suport channel in the Discord server!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please agree to the EULA!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
             }
         }
@@ -180,55 +242,59 @@ namespace Cloaks
         {
             try
             {
-                string contents = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
-                if (contents.Contains("159.203.120.188 s.optifine.net"))
+                string hmm = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
+                if (hmm.Contains("161.35.130.99 s.optifine.net"))
                 {
-                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Indeterminate;
-                    var hosts = "C:\\Windows\\System32\\drivers\\etc\\hosts";
-                    File.WriteAllLines(hosts, File.ReadLines(hosts).Where(l => l != "159.203.120.188 s.optifine.net").ToList());
-                    string secondCheckThingy = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
-                    if (contents.Contains("# THE LINE ABOVE WAS INSERTED BY CLOAKS+"))
+                    var removeOld = "C:\\Windows\\System32\\drivers\\etc\\hosts";
+                    File.WriteAllLines(removeOld, File.ReadLines(removeOld).Where(l => l != "159.203.120.188 s.optifine.net").ToList());
+                    string contents = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
+                    if (contents.Contains("161.35.130.99 s.optifine.net"))
                     {
-                        var removeComment = "C:\\Windows\\System32\\drivers\\etc\\hosts";
-                        File.WriteAllLines(removeComment, File.ReadLines(removeComment).Where(l => l != "# THE LINE ABOVE WAS INSERTED BY CLOAKS+").ToList());
-                        MessageBox.Show("Cloaks+ successfully uninstalled!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Information);
-                        this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                        this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Indeterminate;
+                        var hosts = "C:\\Windows\\System32\\drivers\\etc\\hosts";
+                        File.WriteAllLines(hosts, File.ReadLines(hosts).Where(l => l != "161.35.130.99 s.optifine.net").ToList());
+                        string secondCheckThingy = File.ReadAllText("C:\\Windows\\System32\\drivers\\etc\\hosts");
+                        if (contents.Contains("# THE LINE ABOVE WAS INSERTED BY CLOAKS+"))
+                        {
+                            var removeComment = "C:\\Windows\\System32\\drivers\\etc\\hosts";
+                            File.WriteAllLines(removeComment, File.ReadLines(removeComment).Where(l => l != "# THE LINE ABOVE WAS INSERTED BY CLOAKS+").ToList());
+                            MessageBox.Show("Cloaks+ successfully uninstalled!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Information);
+                            this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Cloaks+ successfully uninstalled!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Information);
+                            this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                        }
+
                     }
-                    else
-                    {
-                        MessageBox.Show("Cloaks+ successfully uninstalled!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Information);
-                        this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
-                    }
-                    
                 }
                 else
                 {
                     MessageBox.Show("Cloaks+ not detected!", "Cloaks+ Uninstaller", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            //even more ebic exeption handling
             catch (IOException IOError)
             {
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                MessageBox.Show(IOError.Message, "Cloaks+ Error!| Please send this to the suport channel in the Discord server!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Cloaks+ has encountered an error. Please send the error message below to the Discord server.\n\n" + IOError.Message + "\nError source: " + IOError.Source, "Cloaks+ Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
             }
             catch (Exception exeption) //idk how to spell lmao
             {
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                MessageBox.Show(exeption.Message, "Cloaks+ Error!| Please send this to the suport channel in the Discord server!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Cloaks+ has encountered an error. Please send the error message below to the Discord server.\n\n" + exeption.Message + "\nError source: " + exeption.Source, "Cloaks+ Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
             }
         }
-        
+
         private void EulaButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://cloaks.plus/terms.txt");
+            Process.Start("https://cloaksplus.com/terms.txt");
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-        //made it a button instead of a border to exit lol
             FadeOut(MainBorder);
             FadeOut(TopBorder);
             FadeOut(SelectFrame);
@@ -248,7 +314,7 @@ namespace Cloaks
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            WindowState = WindowState.Minimized; //good zuhn code moment
+            WindowState = WindowState.Minimized;
         }
     }
-    }
+}

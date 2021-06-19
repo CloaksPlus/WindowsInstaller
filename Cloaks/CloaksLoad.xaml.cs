@@ -2,6 +2,11 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
+using System.Net;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+
 
 namespace Cloaks
 {
@@ -10,6 +15,8 @@ namespace Cloaks
     /// </summary>
     public partial class CloaksLoad : Window
     {
+
+
         MainWindow Main = new MainWindow();
         Storyboard StoryBoard = new Storyboard();
         TimeSpan duration = TimeSpan.FromMilliseconds(500);
