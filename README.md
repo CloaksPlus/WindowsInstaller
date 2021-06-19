@@ -6,9 +6,8 @@ Made by `zuhn.#1337`, `seizure salad#3820`, and `Wowkster#0001`
 Last updated on 6/8/2021
 
 ## 📃 Changelog
-- Handled Exceptions
-- Got rid of the useless using statements
-- Added a comment for people who want to manually uninstall Cloaks+
+- Auto update
+- Some minor cosmetic changes such as new font, etc.
 
 ## 🤝🏻 Contributing
 
