@@ -9,6 +9,9 @@ Last updated on 6/8/2021
 - Auto update
 - Some minor cosmetic changes such as new font, etc.
 
+## Screenshots
+![CloaksPlus Installer](https://user-images.githubusercontent.com/67077815/122657736-47521b80-d134-11eb-9625-e14e3ebe1242.png)
+
 ## 🤝🏻 Contributing
 
 As stated in the [Terms of Use](https://github.com/CloaksPlus/NewInstaller/blob/master/TOU.md), please contact a Cloaks Plus developer is order to contribute to this repository.
