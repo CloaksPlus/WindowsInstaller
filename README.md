@@ -10,8 +10,7 @@ Last updated on 6/8/2021
 - Some minor cosmetic changes such as new font, etc.
 
 ## Screenshots
-![image](https://user-images.githubusercontent.com/49880655/124110618-6b680380-da36-11eb-8f52-51c75f8fe63e.png)
-
+![CloaksPlus Installer](https://user-images.githubusercontent.com/67077815/122657736-47521b80-d134-11eb-9625-e14e3ebe1242.png)
 
 ## 🤝🏻 Contributing
 
