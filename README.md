@@ -8,7 +8,7 @@ Current Installer used by Cloaks+
 
 ## Credits
 
-`zuhn.#1337`, `seizure salad#3820`, and `Wowkster#0001`
+`zuhn.#1337`, `seizure salad#3820`, `Wowkster#0001`, and `binrate#5017`
 
   
 
