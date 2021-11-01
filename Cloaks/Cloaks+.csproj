@@ -52,7 +52,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>C.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\C.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -135,12 +135,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Kiona-Regular.ttf" />
+    <Resource Include="Assets\Kiona-Regular.ttf" />
     <None Include="app.manifest" />
-    <Resource Include="MinecraftBold-nMK1.otf" />
-    <Resource Include="MinecraftBoldItalic-1y1e.otf" />
-    <Resource Include="MinecraftItalic-R8Mo.otf" />
-    <Resource Include="MinecraftRegular-Bmg3.otf" />
+    <Resource Include="Assets\MinecraftBold-nMK1.otf" />
+    <Resource Include="Assets\MinecraftBoldItalic-1y1e.otf" />
+    <Resource Include="Assets\MinecraftItalic-R8Mo.otf" />
+    <Resource Include="Assets\MinecraftRegular-Bmg3.otf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -150,40 +150,40 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="lin.png" />
+    <Resource Include="Assets\lin.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="home.png" />
+    <Resource Include="Assets\home.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="people.png" />
+    <Resource Include="Assets\people.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="settings.png" />
+    <Resource Include="Assets\settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="folder.png" />
+    <Resource Include="Assets\folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="cloaksplus.png" />
+    <Resource Include="Assets\cloaksplus.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="download.png" />
+    <Resource Include="Assets\download.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="trash.png" />
+    <Resource Include="Assets\trash.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="transparent.png" />
+    <Resource Include="Assets\transparent.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="circle.png" />
+    <Resource Include="Assets\circle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="c_favicon.ico" />
+    <Resource Include="Assets\c_favicon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -206,19 +206,20 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="C_background.png" />
+    <Resource Include="Assets\C_background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="C_transparenty.png" />
+    <Resource Include="Assets\C_transparenty.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="C.png" />
+    <Resource Include="Assets\C.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="cloaks3dbanner.png" />
+    <Resource Include="Assets\cloaks3dbanner.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="C.ico" />
+    <Resource Include="Assets\C.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
