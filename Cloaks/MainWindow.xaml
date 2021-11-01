@@ -97,17 +97,17 @@
                         <Label x:Name="InstallLabelMain" FontFamily="/Cloaks+;component/Assets/#Minecraft" HorizontalContentAlignment="Center" Content="Cloaks+ Installation" Foreground="White" Margin="140,121,134,225" FontSize="20" Panel.ZIndex="0"/>
                         <Label x:Name="TermsLabelMain" FontFamily="/Cloaks+;component/Assets/#Minecraft" Content="Check the box below to install Cloaks." HorizontalContentAlignment="Center" Foreground="White" Margin="73,251,53,90" Panel.ZIndex="0"/>
                         <Label x:Name="Useatyourownriskmainlabel" FontFamily="/Cloaks+;component/Assets/#Minecraft" HorizontalContentAlignment="Center" Content="Cloaks plus is 'use at your own risk' with any third party Minecraft client." Foreground="White" Margin="10,350,10,10" Panel.ZIndex="0" FontSize="11.25"/>
-                        <Button x:Name="UninstallButton1" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="187" FontFamily="/Cloaks;component/#Minecraft" Margin="168,161,0,185" Click="InstallButton_Click" FontSize="16">
+                        <Button x:Name="UninstallButton1" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="187" FontFamily="/Cloaks;component/Assets/#Minecraft" Margin="168,161,0,185" Click="InstallButton_Click" FontSize="16">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="15*"/>
                                     <RowDefinition Height="2*"/>
                                 </Grid.RowDefinitions>
                                 <Image x:Name="dlimage2" Source="Assets/download.png" Margin="-24,4,135,2"/>
-                                <Label Content="Install Cloaks+" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/#Minecraft" Margin="-5,2,-8,0" FontSize="15" Height="31" Grid.RowSpan="2"/>
+                                <Label Content="Install Cloaks+" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/Assets/#Minecraft" Margin="-5,2,-8,0" FontSize="15" Height="31" Grid.RowSpan="2"/>
                             </Grid>
                         </Button>
-                        <Button x:Name="UninstallClickButton" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="187" FontFamily="/Cloaks;component/#Kiona" Margin="168,210,0,136" Click="UninstallButton_Click" FontSize="16" Panel.ZIndex="2">
+                        <Button x:Name="UninstallClickButton" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="187" FontFamily="/Cloaks;component/Assets/#Kiona" Margin="168,210,0,136" Click="UninstallButton_Click" FontSize="16" Panel.ZIndex="2">
                             <Grid>
                                 <Image x:Name="CloaksPlusImageLogo" Source="Assets/trash.png" Margin="-22,4,137,6"/>
                                 <Label Content="Uninstall Cloaks+" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/Assets/#Minecraft" Margin="1,2,-14,1" FontSize="15"/>
