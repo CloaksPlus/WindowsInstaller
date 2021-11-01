@@ -962,7 +962,12 @@
             "target": "Package",
             "version": "[4.5.0, )"
           }
-        }
+        },
+        "imports": [
+          "uap10.0.18362"
+        ],
+        "assetTargetFallback": true,
+        "warn": true
       }
     },
     "runtimes": {

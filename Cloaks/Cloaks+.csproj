@@ -171,9 +171,6 @@
     <Resource Include="Assets\download.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\trash.png" />
   </ItemGroup>
   <ItemGroup>

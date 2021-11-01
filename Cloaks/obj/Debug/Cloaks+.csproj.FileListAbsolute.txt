@@ -9,3 +9,12 @@ C:\Users\maxzl\source\repos\Old\Cloaks\obj\Debug\CloaksLoad.baml
 C:\Users\maxzl\source\repos\Old\Cloaks\obj\Debug\MainWindow.baml
 C:\Users\maxzl\source\repos\Old\Cloaks\obj\Debug\Cloaks+.g.resources
 C:\Users\maxzl\source\repos\Old\Cloaks\obj\Debug\Cloaks+.pdb
+C:\Users\maxzl\source\repos\Old\Cloaks\bin\Debug\Cloaks+.exe.config
+C:\Users\maxzl\source\repos\Old\Cloaks\bin\Debug\Cloaks+.exe
+C:\Users\maxzl\source\repos\Old\Cloaks\bin\Debug\Cloaks+.pdb
+C:\Users\maxzl\source\repos\Old\Cloaks\bin\Debug\System.ValueTuple.dll
+C:\Users\maxzl\source\repos\Old\Cloaks\obj\Debug\Cloaks.Properties.Resources.resources
+C:\Users\maxzl\source\repos\Old\Cloaks\obj\Debug\Cloaks+.csproj.GenerateResource.cache
+C:\Users\maxzl\source\repos\Old\Cloaks\obj\Debug\Cloaks+.csproj.CoreCompileInputs.cache
+C:\Users\maxzl\source\repos\Old\Cloaks\obj\Debug\Cloaks+.csproj.CopyComplete
+C:\Users\maxzl\source\repos\Old\Cloaks\obj\Debug\Cloaks+.exe
