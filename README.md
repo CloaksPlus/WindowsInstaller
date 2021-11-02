@@ -18,11 +18,11 @@ Current Installer used by Cloaks+
 
 ## 📃 Changelog
 
-The Cloaks+ Installer's last update has been released on *10/06/2021*
+The Cloaks+ Installer's last update has been released on *11/02/2021*
 
   
 
-- Repository Refactor 🚜
+- Massive Code Refactor 🚜
 
   
 
