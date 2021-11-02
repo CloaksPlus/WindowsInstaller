@@ -1,82 +1,33 @@
 ﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Cloaks"
-        x:Class="Cloaks.MainWindow"
-        mc:Ignorable="d"
-   Title="Cloaks+" Topmost="False" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" BorderThickness="0" Background="Transparent" Height="446.995" Width="718.087" Loaded="Cloaks_Loaded">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    x:Class="Cloaks.MainWindow"
+    mc:Ignorable="d"
+    Title="Cloaks+" 
+    Topmost="False" 
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None" 
+    ResizeMode="NoResize"
+    AllowsTransparency="True"
+    BorderThickness="0" 
+    Background="Transparent"
+    Height="446.995" 
+    Width="718.087" 
+    Loaded="Cloaks_Loaded"
+>
     <Window.TaskbarItemInfo>
-        <TaskbarItemInfo x:Name="taskBarItemInfo1" 
-                     ThumbnailClipMargin="0,0,0,0"
-                     Description="Cloaks+">
-        </TaskbarItemInfo>
+        <TaskbarItemInfo 
+            x:Name="taskBarItemInfo" 
+            ThumbnailClipMargin="0,0,0,0"
+            Description="Cloaks+ Installer"
+        ></TaskbarItemInfo>
     </Window.TaskbarItemInfo>
-    <Window.Resources>
-        <SolidColorBrush
-            Color="#191919"
-            x:Key="ListBox.Static.Background" />
 
-
-        <Style
-            TargetType="{x:Type ListBox}"
-            x:Key="ListBox">
-            <Setter
-                Property="Background"
-                Value="{StaticResource ListBox.Static.Background}" />
-            <Setter
-                Property="BorderThickness"
-                Value="0" />
-            <Setter
-                Property="Foreground"
-                Value="#FFFFFFFF" />
-            <Setter
-                Property="ScrollViewer.PanningMode"
-                Value="Both" />
-            <Setter
-                Property="Stylus.IsFlicksEnabled"
-                Value="False" />
-            <Setter
-                Property="VerticalContentAlignment"
-                Value="Center" />
-            <Setter
-                Property="Template">
-                <Setter.Value>
-                    <ControlTemplate
-                        TargetType="{x:Type ListBox}">
-                        <Border
-                            x:Name="Bd"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}"
-                            Padding="1"
-                            SnapsToDevicePixels="True">
-                            <ScrollViewer
-                                Focusable="False"
-                                Padding="{TemplateBinding Padding}">
-                                <ItemsPresenter
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </ScrollViewer>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <MultiTrigger>
-                                <MultiTrigger.Conditions>
-                                    <Condition
-                                        Property="IsGrouping"
-                                        Value="True" />
-                                    <Condition
-                                        Property="VirtualizingPanel.IsVirtualizingWhenGrouping"
-                                        Value="False" />
-                                </MultiTrigger.Conditions>
-                            </MultiTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="239*"/>
             <RowDefinition Height="208*"/>
@@ -85,104 +36,123 @@
             <ColumnDefinition Width="127*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
+        
+        
         <Border x:Name="MainBorder" BorderThickness="0" HorizontalAlignment="Center" Height="382" Margin="34,42,4,23" VerticalAlignment="Center" Width="642" Background="#FF151515" CornerRadius="5" Grid.RowSpan="2">
             <Border.Effect>
                 <DropShadowEffect ShadowDepth="0"/>
             </Border.Effect>
             <Grid>
 
-                <Border x:Name="InstallFrame" CornerRadius="2.5,2.5,0,0" Background="#FF141414" HorizontalAlignment="Left" Height="382" Margin="122,0,0,0" VerticalAlignment="Center" Width="520" BorderThickness="0" Opacity="0" Visibility="Collapsed">
-                    <Grid>
-                        <Image Source="Assets/C.png" Margin="202,29,223,266" Panel.ZIndex="0"/>
-                        <Label x:Name="InstallLabelMain" FontFamily="/Cloaks+;component/Assets/#Minecraft" HorizontalContentAlignment="Center" Content="Cloaks+ Installation" Foreground="White" Margin="140,121,134,225" FontSize="20" Panel.ZIndex="0"/>
-                        <Label x:Name="TermsLabelMain" FontFamily="/Cloaks+;component/Assets/#Minecraft" Content="Check the box below to install Cloaks." HorizontalContentAlignment="Center" Foreground="White" Margin="73,251,53,90" Panel.ZIndex="0"/>
-                        <Label x:Name="Useatyourownriskmainlabel" FontFamily="/Cloaks+;component/Assets/#Minecraft" HorizontalContentAlignment="Center" Content="Cloaks plus is 'use at your own risk' with any third party Minecraft client." Foreground="White" Margin="10,350,10,10" Panel.ZIndex="0" FontSize="11.25"/>
-                        <Button x:Name="UninstallButton1" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="187" FontFamily="/Cloaks;component/Assets/#Minecraft" Margin="168,161,0,185" Click="InstallButton_Click" FontSize="16">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="15*"/>
-                                    <RowDefinition Height="2*"/>
-                                </Grid.RowDefinitions>
-                                <Image x:Name="dlimage2" Source="Assets/download.png" Margin="-24,4,135,2"/>
-                                <Label Content="Install Cloaks+" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/Assets/#Minecraft" Margin="-5,2,-8,0" FontSize="15" Height="31" Grid.RowSpan="2"/>
-                            </Grid>
-                        </Button>
-                        <Button x:Name="UninstallClickButton" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="187" FontFamily="/Cloaks;component/Assets/#Kiona" Margin="168,210,0,136" Click="UninstallButton_Click" FontSize="16" Panel.ZIndex="2">
-                            <Grid>
-                                <Image x:Name="CloaksPlusImageLogo" Source="Assets/trash.png" Margin="-22,4,137,6"/>
-                                <Label Content="Uninstall Cloaks+" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/Assets/#Minecraft" Margin="1,2,-14,1" FontSize="15"/>
-                            </Grid>
-                        </Button>
-                        <Button x:Name="eulaopen" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="73" FontFamily="/Cloaks;component/Assets/#Minecraft" Margin="224,315,0,37" Click="EulaButton_Click" FontSize="16" Panel.ZIndex="2">
-                            <Grid>
-
-                                <Label Content="EULA" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/Assets/#Minecraft" Margin="-7,-3,-6,2" FontSize="15"/>
-                            </Grid>
-                        </Button>
-                        <CheckBox x:Name="chequeBox" Content="Check this box to agree to the EULA." Foreground="WhiteSmoke" FontFamily="/Cloaks+;component/Assets/#Minecraft" HorizontalAlignment="Left" Margin="140,282,0,0" VerticalAlignment="Top" Width="246"/>
-                    </Grid>
-
-                </Border>
-                <Border x:Name="CreditsFrame" CornerRadius="2.5,2.5,0,0" Background="#FF141414" HorizontalAlignment="Left" Height="382" Margin="122,0,0,0" VerticalAlignment="Center" Width="520" BorderThickness="0" Opacity="0" Visibility="Collapsed">
-                    <Grid>
-                        <Image Source="Assets/C.png" Margin="216,36,215,250"/>
-                        <Label x:Name="CloaksPlusLabelCredits" FontFamily="/Cloaks+;component/Assets/#Minecraft" Content="Credits" Foreground="White" Margin="215,130,215,219" FontSize="23"/>
-                        <Label x:Name="CreditDeveloper1" FontFamily="/Cloaks+;component/Assets/#Minecraft" HorizontalContentAlignment="Center" Content="• Cloaks+ Installer made by zuhn and seizure&#xA;" Foreground="#bdbdbd" Margin="10,168,10,179" FontSize="15"/>
-                        <Label x:Name="CreditDeveloper2" FontFamily="/Cloaks+;component/Assets/#Minecraft" HorizontalContentAlignment="Center" Content="• Backend was developed by Wowkster and Jacob" Foreground="#bdbdbd" Margin="10,208,31,143" FontSize="15"/>
-                        <Label x:Name="CreditDeveloper3" FontFamily="/Cloaks+;component/Assets/#Minecraft" HorizontalContentAlignment="Center" Content="• Cloaks+ Graphics and logos were made by atlas" Foreground="#bdbdbd" Margin="10,244,31,107" FontSize="15"/>
-                        <Label x:Name="CreditDeveloper4" FontFamily="/Cloaks+;component/Assets/#Minecraft" HorizontalContentAlignment="Center" Content="• Special thanks to our staff team for &#xD;keeping the server up and running :D" Foreground="#bdbdbd" Margin="10,280,10,56" FontSize="15"/>
-                    </Grid>
-                </Border>
-
-
-
-                <Border x:Name="TopBorder" BorderThickness="2" HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="646" Background="#FF1C1C1C" CornerRadius="5,5,0,0" MouseDown="TopBorder_MouseDown" Margin="-2, -40, -2, 0" Grid.ColumnSpan="3">
+                <!--Window Title Bar-->
+                <Border x:Name="TopBorder" Style="{DynamicResource windowTitleBar}" MouseDown="TopBorder_MouseDown">
                     <Grid Margin="-1,-1,1,1">
-
-
-                        <Label x:Name="TopBorderCloaksMainLabel" FontFamily="/Cloaks+;component/Assets/#Minecraft" Content="Cloaks+" Foreground="White" Margin="286,0,286,-3" FontSize="16"/>
-                        <Image x:Name="Logo" Source="Assets/C_transparenty.png" Margin="1,0,611,1"/>
-                        <Button Content="&#xE711;" FontSize="15" Style="{DynamicResource HoverButton}" FontFamily="Segoe MDL2 Assets" Background="Transparent" Foreground="WhiteSmoke" HorizontalAlignment="Left" Height="28" Margin="612,0,0,0" BorderThickness="0" VerticalAlignment="Top" Width="30" Click="Button_Click"/>
-                        <Button Content="&#xE738;" FontSize="15" Style="{DynamicResource HoverButton}" FontFamily="Segoe MDL2 Assets" Background="Transparent" Foreground="WhiteSmoke" HorizontalAlignment="Left" Height="28" Margin="577,0,0,0" BorderThickness="0" VerticalAlignment="Top" Width="30" Click="Button_Click_1"/>
+                        <Label x:Name="TopBorderCloaksMainLabel" Content="Cloaks+" Style="{DynamicResource windowTitle}"/>
+                        <Image x:Name="Logo" Source="Assets/logo_transparent.png" Margin="1,0,611,1"/>
+                        <Button Content="&#xE711;" Style="{DynamicResource windowButton}" Margin="612,0,0,0" Click="CloseButton_Click"/>
+                        <Button Content="&#xE738;" Style="{DynamicResource windowButton}" Margin="577,0,0,0" Click="MinimizeButton_Click"/>
                     </Grid>
                 </Border>
+
+                <Border x:Name="HomeFrame" Style="{DynamicResource frame}">
+                    <Grid Margin="0,0,-20,0" >
+                        <Image Style="{DynamicResource frameImage}"/>
+                        <Label Content="Cloaks+" Style="{DynamicResource frameTitle}"/>
+
+                        <Rectangle Style="{DynamicResource frameRule}" />
+
+                        <TextBlock Style="{DynamicResource frameText}" >
+                            Go to the Install tab in install Cloaks+ on your computer
+                            <LineBreak />
+                            <LineBreak />
+                            Recent Updates:
+                            <LineBreak />
+                            <LineBreak />
+                            • Massive code refactor
+                            <LineBreak />
+                            • Current version is v.1.4
+                        </TextBlock>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="CreditsFrame" Style="{DynamicResource frame}" Opacity="0" Visibility="Collapsed">
+                    <Grid Margin="0,0,-20,0" >
+                        <Image Style="{DynamicResource frameImage}"/>
+                        <Label Content="Credits" Style="{DynamicResource frameTitle}"/>
+
+                        <Rectangle Style="{DynamicResource frameRule}" />
+
+                        <TextBlock Style="{DynamicResource frameText}"  >
+                            • Cloaks+ Installer made by <Italic>Wowkster#0001</Italic>, <Italic>zuhn.#0442</Italic>, and <Italic>seizure salad#3820</Italic>
+                            <LineBreak />
+                            <LineBreak />
+                            ©️2021 Cloaks+ LLC
+                        </TextBlock>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="InstallFrame" Style="{DynamicResource frame}" Opacity="0" Visibility="Collapsed">
+                    <Grid Margin="0,0,-20,0" >
+                        <Image Style="{DynamicResource frameImage}"/>
+                        <Label Content="Cloaks+ Installation" Style="{DynamicResource frameTitle}"/>
+
+                        <Rectangle Style="{DynamicResource frameRule}" />
+
+                        <TextBlock Style="{DynamicResource frameText}">
+                            Cloaks+ is 'use at your own risk' with any third party Minecraft client, and is not guaranteed to work with all versions.
+                        </TextBlock>
+
+                        <Button x:Name="InstallButton" Style="{DynamicResource installButton}" Click="InstallButton_Click"  Margin="-220, 240, 0, 0">
+                            <Grid Style="{DynamicResource installButtonGrid}">
+                                <Image Source="Assets/icons/download.png" Style="{DynamicResource installButtonIcon}"/>
+                                <Label Content="Install Cloaks+" Style="{DynamicResource installButtonText}"/>
+                            </Grid>
+                        </Button>
+
+                        <Button x:Name="UninstallButton" Style="{DynamicResource installButton}" Click="UninstallButton_Click" Margin="220, 240, 0, 0">
+                            <Grid Style="{DynamicResource installButtonGrid}">
+                                <Image Source="Assets/icons/trash.png" Style="{DynamicResource installButtonIcon}" Width="25" Margin="-150, 0, 0, 5"/>
+                                <Label Content="Uninstall Cloaks+" Style="{DynamicResource installButtonText}" Margin="25, 0, 0, 5"/>
+                            </Grid>
+                        </Button>
+                    </Grid>
+                </Border>
+                
+                
+
+                
             </Grid>
         </Border>
-        <Border x:Name="HomeFrame" Background="{x:Null}" Margin="549,63,-376,35" Grid.RowSpan="2" Grid.ColumnSpan="2">
-            <Grid>
-                <Image Source="Assets/C.png" Margin="200,10,233,247"/>
-                <Label x:Name="MainTextLabelHome" FontFamily="/Cloaks+;component/Assets/#Minecraft" Content="Cloaks+" Foreground="White" Margin="227,102,190,209" FontSize="23"/>
-                <Label x:Name="MadeByMainHome" HorizontalContentAlignment="Center" FontFamily="/Cloaks+;component/Assets/#Minecraft" Content="Installer made by seizure and zuhn" Foreground="#bdbdbd" Margin="133.5,133.5,133.5,191" FontSize="14"/>
-                <Image x:Name="Line3" Source="Assets/lin.png" Margin="112,69,115,177" Stretch="UniformToFill"/>
-                <Label x:Name="Changelog2" FontFamily="/Cloaks+;component/Assets/#Minecraft" Content="• hotfix to fix some things" Foreground="#bdbdbd" Margin="100,177,47,128" FontSize="15"/>
-                <Label x:Name="Changelog3" FontFamily="/Cloaks+;component/Assets/#Minecraft" Content="• Current version is v.1.4" Foreground="#bdbdbd" Margin="172,226,127,85" FontSize="15"/>
-            </Grid>
-        </Border>
+        
+        
         <Border x:Name="SelectFrame" CornerRadius="2.5,2.5,0,0" Background="#FF1C1C1C" HorizontalAlignment="Left" Height="335" Margin="-90,92,0,20" VerticalAlignment="Center" Width="148" Grid.RowSpan="2">
             <Grid>
-                <Image x:Name="SideBarCloaksLogo" Source="Assets/cloaks3dbanner.png" Margin="10,10,10,286"/>
-                <Image x:Name="line4" Source="Assets/lin.png" Margin="0,10,0,239"/>
-                <Label Content="Cloaks+ v.1.4" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/Assets/#Minecraft" Margin="3,314,0,0" FontSize="9" RenderTransformOrigin="0.5,0.5" Width="124"/>
-                <Button x:Name="SideHomButton" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="128" FontFamily="/Cloaks;component/Assets/#Kiona" Margin="10,96,0,211" Height="28" Click="HomeFrame_Click" FontSize="16">
+                <Image Source="Assets/banner.png" Margin="10,10,10,286"/>
+                <Image Source="Assets/line.png" Margin="0,10,0,239"/>
+
+                <Button x:Name="SideHomeButton" Style="{StaticResource hoverButton}" Margin="10,96,0,211" Click="HomeFrame_Click" Background="#434343">
                     <Grid>
-                        <Image x:Name="HomeImage" Source="Assets/home.png" Margin="7,1,93,2"/>
-                        <Label Content="Home" VerticalContentAlignment="Center" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/Assets/#Minecraft" Margin="30,-3,39,0" FontSize="15" Height="26"/>
+                        <Image Source="Assets/icons/home.png" Margin="7,1,93,2"/>
+                        <Label Content="Home" Style="{StaticResource navText}"/>
                     </Grid>
                 </Button>
-                <Button x:Name="InstallButtonSide" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="128" FontFamily="/Cloaks;component/Assets/#Kiona" Margin="10,129,0,178" Height="28" Click="InstallFrame_Click" FontSize="16">
+                
+                <Button x:Name="InstallButtonSide" Style="{StaticResource hoverButton}" Margin="10,129,0,178" Click="InstallFrame_Click">
                     <Grid>
-                        <Image x:Name="dlimage" Source="Assets/download.png" Margin="7,1,93,2"/>
-                        <Label Content="Install" VerticalContentAlignment="Center" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/Assets/#Minecraft" Margin="0,-3,10,0" FontSize="15" Height="26" HorizontalAlignment="Right" Width="85"/>
+                        <Image Source="Assets/icons/download.png" Margin="7,1,93,2"/>
+                        <Label Content="Install" Style="{StaticResource navText}"/>
                     </Grid>
                 </Button>
-                <Button x:Name="CreditsButtonSide" Style="{DynamicResource HoverButton}" Background="#1c1c1c" BorderThickness="0" Foreground="White" HorizontalAlignment="Left" Width="128" FontFamily="/Cloaks;component/#Kiona" Margin="10,162,0,145" Height="28" Click="CreditsFrame_Click" FontSize="16">
+                
+                <Button x:Name="CreditsButtonSide" Style="{StaticResource hoverButton}" Margin="10,162,0,145" Click="CreditsFrame_Click">
                     <Grid>
-                        <Image x:Name="GroupImageSide" Source="Assets/people.png" Margin="7,1,93,2"/>
-                        <Label Content="Credits" VerticalContentAlignment="Center" VerticalAlignment="Top" Foreground="White" Background="{x:Null}" FontFamily="/Cloaks+;component/Assets/#Minecraft" Margin="30,-3,10,0" FontSize="15" Height="26"/>
+                        <Image Source="Assets/icons/people.png" Margin="7,1,93,2"/>
+                        <Label Content="Credits" Style="{StaticResource navText}"/>
                     </Grid>
                 </Button>
+
+                <Label Content="Cloaks+ v.1.4"  Style="{StaticResource navVersion}"  Margin="3, 305, 0, 0" Width="124"/>
             </Grid>
         </Border>
-
     </Grid>
 </Window>

@@ -1,0 +1,15 @@
+./git
+/git
+*git
+*.git
+
+./vs
+/vs
+*vs
+*.vs
+
+/bin
+/Cloaks/bin
+
+/obj
+/Cloaks/obj

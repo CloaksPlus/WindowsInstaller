@@ -1,165 +1,170 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
+using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
+using System.Windows.Media;
 using System.Windows.Shell;
-using System.Security.Principal;
+using System.Windows.Threading;
 
 namespace Cloaks
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        // Animation 
+        readonly Animator animator = new Animator();
 
-        public static readonly string version = "1.3";
-        public static readonly string versionLink = "https://raw.githubusercontent.com/SeizureSaladd/vers/main/vers.txt";
-        public static string installerDownload = new WebClient()
-        { Proxy = ((IWebProxy)null) }.DownloadString("https://raw.githubusercontent.com/SeizureSaladd/vers/main/download.txt");
-        public string hosts = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "drivers/etc/hosts");
+        // Updater 
+        private static readonly string VERSION_LINK = "https://api.github.com/repos/CloaksPlus/NewInstaller/releases/latest";
 
+        // Hosts
+        private static readonly string HOSTS_PATH = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "drivers/etc/hosts");
 
+        // Frame Link Colors
+        private static readonly Color HighlightColor = Color.FromArgb(0xFF, 0x43, 0x43, 0x43);
+        private static readonly Color DarkColor = Color.FromArgb(0xFF, 0x1C, 0x1C, 0x1C);
 
-        Storyboard StoryBoard = new Storyboard();
-        TimeSpan duration = TimeSpan.FromMilliseconds(500);
-        TimeSpan duration2 = TimeSpan.FromMilliseconds(1000);
-
-        private IEasingFunction Smooth
-        {
-            get;
-            set;
-        }
-        = new QuarticEase
-        {
-            EasingMode = EasingMode.EaseInOut
-        };
-
-        public void Fade(DependencyObject Object)
-        {
-            DoubleAnimation FadeIn = new DoubleAnimation()
-            {
-                From = 0.0,
-                To = 1.0,
-                Duration = new Duration(duration),
-            };
-            Storyboard.SetTarget(FadeIn, Object);
-            Storyboard.SetTargetProperty(FadeIn, new PropertyPath("Opacity", 1));
-            StoryBoard.Children.Add(FadeIn);
-            StoryBoard.Begin();
-        }
-
-        public void FadeOut(DependencyObject Object)
-        {
-            DoubleAnimation Fade = new DoubleAnimation()
-            {
-                From = 1.0,
-                To = 0.0,
-                Duration = new Duration(duration),
-            };
-            Storyboard.SetTarget(Fade, Object);
-            Storyboard.SetTargetProperty(Fade, new PropertyPath("Opacity", 1));
-            StoryBoard.Children.Add(Fade);
-            StoryBoard.Begin();
-        }
-
-        public void ObjectShift(DependencyObject Object, Thickness Get, Thickness Set)
-        {
-            ThicknessAnimation Animation = new ThicknessAnimation()
-            {
-                From = Get,
-                To = Set,
-                Duration = duration2,
-                EasingFunction = Smooth,
-            };
-            Storyboard.SetTarget(Animation, Object);
-            Storyboard.SetTargetProperty(Animation, new PropertyPath(MarginProperty));
-            StoryBoard.Children.Add(Animation);
-            StoryBoard.Begin();
-        }
-
-        private bool CloaksPlusExist()
-        {
-            try
-            {
-                return hosts.Contains("161.35.130.99 s.optifine.net");
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        private bool IsReadonly()
-        {
-            FileInfo file = new FileInfo(hosts);
-            return file.IsReadOnly;
-        }
-
-        public bool IsInstalled()
-        {
-            return CloaksPlusExist();
-        }
-
-        public static bool IsAdministrator()
-        {
-            var identity = WindowsIdentity.GetCurrent();
-            var principal = new WindowsPrincipal(identity);
-            return principal.IsInRole(WindowsBuiltInRole.Administrator);
-        }
+        AutoResetEvent updateHandle = new AutoResetEvent(false);
 
         public MainWindow()
         {
             if (!IsAdministrator())
             {
-                MessageBox.Show("You need to run this application as an administrator!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Error);
+                DialogueBox.Show("Cloaks+", "You need to run this application as an administrator!", this);
+                Close();
                 Environment.Exit(0);
             }
+
             try
             {
-                string getVersion = new WebClient().DownloadString(versionLink);
-                if (version != getVersion.Trim())
+                InitializeComponent();
+                Activate();
+
+                // Create a thread
+                Thread newWindowThread = new Thread(new ThreadStart(() =>
                 {
-                    MessageBox.Show("This version of Cloaks+ is outdated. Please press OK to update.", "Cloaks+ | Update avaliable", MessageBoxButton.OK, MessageBoxImage.Error);
-                    string ok = Path.GetDirectoryName(Directory.GetCurrentDirectory());
-                    if (File.Exists(ok + "\\Cloaks+.exe"))
-                        File.Delete(ok + "\\Cloaks+.exe");
-                    new WebClient() { Proxy = ((IWebProxy)null) }.DownloadFile(MainWindow.installerDownload, ok + "\\Cloaks+.exe");
-                    ProcessStartInfo startInfo = new ProcessStartInfo(ok + "\\Cloaks+.exe");
-                    startInfo.Verb = "runas";
-                    Process.Start(startInfo);
-                    Close();
-                    Environment.Exit(0);
+                    CheckForUpdate();
+                    Dispatcher.Run();
+                }));
+                newWindowThread.SetApartmentState(ApartmentState.STA);
+                newWindowThread.IsBackground = true;
+                newWindowThread.Start();
+
+
+
+                updateHandle.WaitOne();
+
+            }
+            catch (Exception ex)
+            {
+                ThrowError(ex, "trying to update");
+            }
+        }
+
+        private void ThrowError(Exception ex, string action)
+        {
+            DialogueBox.ShowErrorWithCallback("Cloaks+ Error!", "Cloaks+ has encountered an error while " + action + ". Please send the error message below to the Discord server.\n\n" + ex.Message + "\nError source: " + ex.Source, (res) =>
+            {
+                Environment.Exit(0);
+            }, this);
+        }
+
+        /* UPDATE CHECK */
+
+        private void CheckForUpdate()
+        {
+            // Remove Old Update Files
+            {
+                string fileName = Process.GetCurrentProcess().MainModule.FileName;
+                File.SetAttributes(fileName, FileAttributes.Normal);
+                if (File.Exists(fileName + "_"))
+                {
+                    File.SetAttributes(fileName + "_", FileAttributes.Normal);
+                    File.Delete(fileName + "_");
                 }
             }
-            catch (Exception ohShitWhatNow)
+
+            WebClient webClient = new WebClient();
+            webClient.Headers.Add("User-Agent", "Windows / Cloaks+ Installer");
+
+            dynamic githubResponse = JsonConvert.DeserializeObject(webClient.DownloadString(VERSION_LINK));
+
+            string githubVersion = "" + githubResponse.tag_name;
+
+            Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
+            Version latestVersion = new Version(githubVersion.Substring(0, 1) == "v" ? githubVersion.Substring(1) : githubVersion);
+
+            int versionComapre = currentVersion.CompareTo(latestVersion);
+
+            if (versionComapre > 0 || versionComapre == 0)
             {
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                MessageBox.Show("Cloaks+ has encountered an error trying to update. Please send the error message below to the Discord server.\n\n" + ohShitWhatNow.Message + "\nError source: " + ohShitWhatNow.Source, "Cloaks+ Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                updateHandle.Set();
+                return; // Dont update if the current version is higher (dev build) or equal (up to date)
             }
-            //i'm dumb as shit and there's a \n at the end
-            InitializeComponent();
-            this.Activate();
+
+            DialogueBox.ShowWithCallback("Cloaks+ | Update avaliable", "This version of Cloaks+ is outdated. Please press OK to update.", (res) =>
+            {
+                if (!res)
+                {
+                    Environment.Exit(0);
+                    return;
+                }
+
+                try
+                {
+                    // Download New Version
+                    string fileName = Process.GetCurrentProcess().MainModule.FileName;
+                    File.SetAttributes(fileName, FileAttributes.Normal);
+                    if (File.Exists(fileName + "_"))
+                    {
+                        File.SetAttributes(fileName + "_", FileAttributes.Normal);
+                        File.Delete(fileName + "_");
+                    }
+
+                    File.Move(fileName, fileName + "_");
+
+                    string tempName = Path.GetDirectoryName(fileName) + "\\temp.exe";
+                    webClient.Proxy = null;
+                    webClient.DownloadFile("" + githubResponse.assets[0].browser_download_url, tempName);
+                    File.Move(tempName, fileName);
+
+                    // Start new Process and Terminate the running one
+                    ProcessStartInfo startInfo = new ProcessStartInfo(fileName) { Verb = "runas" };
+                    Process.Start(startInfo);
+                    Environment.Exit(0);
+                }
+                catch (Exception ex)
+                {
+                    ThrowError(ex, "trying to update");
+                }
+
+            },
+            this);
         }
+
+        /* ANIMATION */
 
         private void Cloaks_Loaded(object sender, RoutedEventArgs e)
         {
-            Fade(MainBorder);
-            Fade(TopBorder);
-            Fade(SelectFrame);
+            animator.Fade(MainBorder);
+            animator.Fade(TopBorder);
+            animator.Fade(SelectFrame);
 
-            ObjectShift(MainBorder, MainBorder.Margin, new Thickness(0, 0, 0, 0));
-            ObjectShift(TopBorder, TopBorder.Margin, new Thickness(-2, -2, -2, 0));
-            ObjectShift(SelectFrame, TopBorder.Margin, new Thickness(28, 30.5, 0, 0));
-            ObjectShift(HomeFrame, HomeFrame.Margin, new Thickness(124, 63, 19, 35));
+            animator.ObjectShift(MainBorder, MainBorder.Margin, new Thickness(0, 0, 0, 0));
+            animator.ObjectShift(TopBorder, TopBorder.Margin, new Thickness(-2, -2, -2, 0));
+            animator.ObjectShift(SelectFrame, TopBorder.Margin, new Thickness(28, 30.5, 0, 0));
+            animator.ObjectShift(HomeFrame, HomeFrame.Margin, new Thickness(160, 45, 20, 0));
 
         }
+
+        /* WINDOW INTERACTIONS */
 
         private void TopBorder_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -177,6 +182,10 @@ namespace Cloaks
             InstallFrame.Visibility = Visibility.Collapsed;
             CreditsFrame.Visibility = Visibility.Collapsed;
             CreditsFrame.Opacity = 0;
+
+            SideHomeButton.Background = new SolidColorBrush(HighlightColor);
+            InstallButtonSide.Background = new SolidColorBrush(DarkColor);
+            CreditsButtonSide.Background = new SolidColorBrush(DarkColor);
         }
 
         private void InstallFrame_Click(object sender, RoutedEventArgs e)
@@ -187,6 +196,10 @@ namespace Cloaks
             InstallFrame.Visibility = Visibility.Visible;
             CreditsFrame.Visibility = Visibility.Collapsed;
             CreditsFrame.Opacity = 0;
+
+            SideHomeButton.Background = new SolidColorBrush(DarkColor);
+            InstallButtonSide.Background = new SolidColorBrush(HighlightColor);
+            CreditsButtonSide.Background = new SolidColorBrush(DarkColor);
         }
 
         private void CreditsFrame_Click(object sender, RoutedEventArgs e)
@@ -197,120 +210,60 @@ namespace Cloaks
             InstallFrame.Opacity = 0;
             CreditsFrame.Visibility = Visibility.Visible;
             CreditsFrame.Opacity = 100;
-        }
 
-        private void InstallCloaks()
-        {
-            if (File.Exists(hosts))
-            {
-                if (IsReadonly())
-                {
-                    File.SetAttributes(hosts, FileAttributes.Normal);
-                    InstallCloaks();
-                }
-                var deleteOptifineShit = "s.optifine.net";
-                var read = File.ReadAllLines(hosts);
-                var delete = read.Where(line => !line.Contains(deleteOptifineShit));
-                File.WriteAllLines(hosts, delete);
-
-                using (StreamWriter hosts = File.AppendText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "drivers/etc/hosts")))
-                {
-                    hosts.WriteLine("\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
-                    MessageBox.Show("Cloaks+ successfully installed!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                File.SetAttributes(hosts, FileAttributes.ReadOnly);
-            }
-            else
-            {
-                File.WriteAllText(hosts, "\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
-                MessageBox.Show("Cloaks+ successfully installed!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-        private void UninstallCloaks()
-        {
-            if (IsInstalled())
-            {
-                if (IsReadonly())
-                {
-                    File.SetAttributes(hosts, FileAttributes.Normal);
-                    UninstallCloaks();
-                }
-                File.WriteAllLines(hosts, File.ReadLines(hosts).Where(l => l != "161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+").ToList());
-                var deleteOptifineShit = "s.optifine.net";
-                var oldLines = File.ReadAllLines(hosts);
-                var newLines = oldLines.Where(line => !line.Contains(deleteOptifineShit));
-                File.WriteAllLines(hosts, newLines);
-                MessageBox.Show("Cloaks+ successfully uninstalled!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            }
-            else
-            {
-                MessageBox.Show("Cloaks+ not detected!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            SideHomeButton.Background = new SolidColorBrush(DarkColor);
+            InstallButtonSide.Background = new SolidColorBrush(DarkColor);
+            CreditsButtonSide.Background = new SolidColorBrush(HighlightColor);
         }
 
         private void InstallButton_Click(object sender, RoutedEventArgs e)
         {
-            if (chequeBox.IsChecked == true)
+            DialogueBox.ShowEULA((result) =>
             {
+
+                if (!result)
+                {
+                    // If Dialogue was canceled, do nothing
+                    return;
+                }
+
+                // If Dialogue was successful try installing
+                taskBarItemInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
                 try
                 {
-                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Indeterminate;
                     InstallCloaks();
-                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
                 }
-                catch (Exception bruvIdkHowToSpellExecption)
+                catch (Exception ex)
                 {
-                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                    MessageBox.Show("Cloaks+ has encountered an error. Please send the error message below to the Discord server.\n\n" + bruvIdkHowToSpellExecption.Message + "\nError source: " + bruvIdkHowToSpellExecption.Source, "Cloaks+ Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                    ThrowError(ex, "installing");
                 }
-            }
-            else
-            {
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                MessageBox.Show("Please agree to the EULA!", "Cloaks+", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
-            }
+                taskBarItemInfo.ProgressState = TaskbarItemProgressState.None;
+            }, this);
         }
 
         private void UninstallButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Indeterminate;
+                taskBarItemInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
                 UninstallCloaks();
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                taskBarItemInfo.ProgressState = TaskbarItemProgressState.None;
             }
-            catch (IOException IOError)
+            catch (Exception ex)
             {
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                MessageBox.Show("Cloaks+ has encountered an error. Please send the error message below to the Discord server.\n\n" + IOError.Message + "\nError source: " + IOError.Source, "Cloaks+ Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
-            }
-            catch (Exception exeption) //idk how to spell lmao
-            {
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.Error;
-                MessageBox.Show("Cloaks+ has encountered an error. Please send the error message below to the Discord server.\n\n" + exeption.Message + "\nError source: " + exeption.Source, "Cloaks+ Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                this.taskBarItemInfo1.ProgressState = TaskbarItemProgressState.None;
+                ThrowError(ex, "uninstalling");
             }
         }
 
-        private void EulaButton_Click(object sender, RoutedEventArgs e)
+        private async void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://cloaksplus.com/terms.txt");
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            FadeOut(MainBorder);
-            FadeOut(TopBorder);
-            FadeOut(SelectFrame);
-            ObjectShift(MainBorder, MainBorder.Margin, new Thickness(49, 70, 49, 26));
-            ObjectShift(TopBorder, TopBorder.Margin, new Thickness(0, -28, 0, 0));
-            ObjectShift(SelectFrame, SelectFrame.Margin, new Thickness(-90, 79, 0, 0));
-            ObjectShift(HomeFrame, HomeFrame.Margin, new Thickness(101, 0, 199, 230));
+            animator.FadeOut(MainBorder);
+            animator.FadeOut(TopBorder);
+            animator.FadeOut(SelectFrame);
+            animator.ObjectShift(MainBorder, MainBorder.Margin, new Thickness(49, 70, 49, 26));
+            animator.ObjectShift(TopBorder, TopBorder.Margin, new Thickness(0, -28, 0, 0));
+            animator.ObjectShift(SelectFrame, SelectFrame.Margin, new Thickness(-90, 79, 0, 0));
+            animator.ObjectShift(HomeFrame, HomeFrame.Margin, new Thickness(101, 0, 199, 230));
             await Task.Delay(1000);
             Application.Current.Shutdown();
             await Task.Delay(1000);
@@ -320,9 +273,92 @@ namespace Cloaks
             Environment.Exit(0);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        /* LOGIC HELPERS */
+
+        private bool CloaksPlusExists()
+        {
+            try
+            {
+                return File.ReadAllText(HOSTS_PATH).Contains("161.35.130.99 s.optifine.net");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        private bool HostsIsReadonly()
+        {
+            FileInfo file = new FileInfo(HOSTS_PATH);
+            return file.IsReadOnly;
+        }
+
+        public static bool IsAdministrator()
+        {
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+
+        private void RemoveAllInstallations()
+        {
+            // Filter our all lines with "s.optifine.net" (or old Cloaks+ content) and write the valid lines back
+            string OPTIFINE_URL = "s.optifine.net";
+            string OLD_CLOAKS_MARKER = "INSERTED BY CLOAKS+";
+            var hostsContent = File.ReadAllLines(HOSTS_PATH);
+            var validLines = hostsContent.Where(line => !(line.Contains(OPTIFINE_URL) || line.Contains(OLD_CLOAKS_MARKER)));
+            File.WriteAllLines(HOSTS_PATH, validLines);
+        }
+
+        /* PROGRAM LOGIC */
+
+        private void InstallCloaks()
+        {
+            // Check if the hosts file exists at all
+            if (!File.Exists(HOSTS_PATH))
+            {
+                File.WriteAllText(HOSTS_PATH, "\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
+                DialogueBox.Show("Cloaks+", "Cloaks+ successfully installed!", this);
+                return;
+            }
+
+            if (HostsIsReadonly())
+            {
+                File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
+            }
+
+            RemoveAllInstallations();
+
+            // Append to the end of the file
+            using (StreamWriter hosts = File.AppendText(HOSTS_PATH))
+            {
+                hosts.WriteLine("\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
+                DialogueBox.Show("Cloaks+", "Cloaks+ successfully installed!", this);
+            }
+            File.SetAttributes(HOSTS_PATH, FileAttributes.ReadOnly | FileAttributes.System);
+
+        }
+
+        private void UninstallCloaks()
+        {
+            if (!CloaksPlusExists())
+            {
+                DialogueBox.Show("Not Found", "Cloaks+ installation was not found on system.", this);
+                return;
+            }
+
+            if (HostsIsReadonly())
+            {
+                File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
+            }
+
+            RemoveAllInstallations();
+            DialogueBox.Show("Cloaks+", "Cloaks+ successfully uninstalled!", this);
         }
     }
 }

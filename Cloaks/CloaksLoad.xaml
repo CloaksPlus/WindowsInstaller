@@ -3,12 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Cloaks"
         mc:Ignorable="d"
-Title="Cloaks+" Topmost="True" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" BorderThickness="0" Background="Transparent" Height="400" Width="670" Loaded="Cloaks_Loaded">
+        Title="Cloaks+" 
+        Topmost="True" 
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        ResizeMode="NoResize" 
+        AllowsTransparency="True" 
+        BorderThickness="0" 
+        Background="Transparent" 
+        Height="400" 
+        Width="670" 
+        Loaded="Cloaks_Loaded">
     <Grid>
-        <Image x:Name="CloaksBG" HorizontalAlignment="Center" Height="190" Margin="236,210,236,0" VerticalAlignment="Center" Width="198" Source="C_background.png"/>
-        <Image x:Name="CloaksText" HorizontalAlignment="Center" Height="150" Margin="260,55,260,195" VerticalAlignment="Center" Width="150" Source="transparent.png"/>
-
+        <Image x:Name="CloaksBG" HorizontalAlignment="Center" Height="190" Margin="236,210,236,0" VerticalAlignment="Center" Width="198" Source="Assets/logo_background.png"/>
+        <Image x:Name="CloaksText" HorizontalAlignment="Center" Height="150" Margin="260,55,260,195" VerticalAlignment="Center" Width="150" Source="Assets/logo_transparent.png"/>
     </Grid>
 </Window>
