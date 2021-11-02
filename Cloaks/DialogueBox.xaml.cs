@@ -29,52 +29,32 @@ namespace Cloaks
 
         public static void Show(string title, string message, MainWindow main)
         {
-            try
-            {
-                main.Hide();
-            }
-            catch (Exception) { };
-            new DialogueBox(title, message, false, null, main, false).Show();
+            
+            new DialogueBox(title, message, false, null, main, false).ShowDialog();
         }
 
         public static void ShowWithCallback(string title, string message, Action<bool> callback, MainWindow main)
         {
-            try
-            {
-                main.Hide();
-            }
-            catch (Exception) { };
-            new DialogueBox(title, message, false, callback, main, false).Show();
+            
+            new DialogueBox(title, message, false, callback, main, false).ShowDialog();
         }
 
         public static void ShowError(string title, string message, MainWindow main)
         {
-            try
-            {
-                main.Hide();
-            }
-            catch (Exception) { };
-            new DialogueBox(title, message, true, null, main, false).Show();
+           
+            new DialogueBox(title, message, true, null, main, false).ShowDialog();
         }
 
         public static void ShowErrorWithCallback(string title, string message, Action<bool> callback, MainWindow main)
         {
-            try
-            {
-                main.Hide();
-            }
-            catch (Exception) { };
-            new DialogueBox(title, message, true, callback, main, false).Show();
+           
+            new DialogueBox(title, message, true, callback, main, false).ShowDialog();
         }
 
         public static void ShowEULA(Action<bool> callback, MainWindow main)
         {
-            try
-            {
-                main.Hide();
-            }
-            catch (Exception) { };
-            new DialogueBox("Cloaks+ End User License Agreement", @"By clicking 'I Agree' below, you agree to the Cloaks+ End User License Agreement. To view the contents of the agreement, click the 'EULA' button below.", false, callback, main, true).Show();
+          
+            new DialogueBox("Cloaks+ End User License Agreement", @"By clicking 'I Agree' below, you agree to the Cloaks+ End User License Agreement. To view the contents of the agreement, click the 'EULA' button below.", false, callback, main, true).ShowDialog();
         }
 
         private void Box_Loaded(object sender, RoutedEventArgs e)

@@ -223,7 +223,7 @@
     <Resource Include="Assets\cloaks_plus.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EmbeddedAssemblies\Newtonsoft.Json.dll" />
+    <Content Include="EmbeddedAssemblies\Newtonsoft.Json.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">

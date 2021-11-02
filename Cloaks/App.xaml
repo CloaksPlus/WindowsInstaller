@@ -52,15 +52,15 @@
 
         <!--Window Title Bar-->
         <Style x:Key="windowTitleBar" TargetType="Border">
-            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="CornerRadius" Value="5,5,0,0"/>
-            <Setter Property="Margin" Value="-2, 0, -2, 0"/>
+            <Setter Property="Margin" Value="0, -2, 0, 0"/>
             
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
             
             <Setter Property="Height" Value="33"/>
-            <Setter Property="Width" Value="646"/>
+            <Setter Property="Width" Value="650"/>
             
             <Setter Property="Background" Value="#FF1C1C1C"/>
             
@@ -69,7 +69,8 @@
 
         <!--Window Title Text-->
         <Style x:Key="windowTitle" TargetType="Label">
-            <Setter Property="Margin" Value="286,0,286,-3"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
 
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="{x:Null}"/>
@@ -86,10 +87,10 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="WhiteSmoke"/>
 
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
 
-            <Setter Property="Height" Value="28"/>
+            <Setter Property="Height" Value="30"/>
             <Setter Property="Width" Value="30"/>
 
             <Setter Property="BorderThickness" Value="0"/>
@@ -113,7 +114,7 @@
         <Style x:Key="frameTitle" TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Center"/>
 
-            <Setter Property="Margin" Value="0,110,0,0"/>
+            <Setter Property="Margin" Value="0,120,0,0"/>
 
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="Foreground" Value="White"/>
@@ -192,16 +193,45 @@
             <Setter Property="FontSize" Value="19"/>
         </Style>
 
+        <!--Nav-->
+        <Style x:Key="nav" TargetType="Border">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#FF1C1C1C"/>
+            <Setter Property="CornerRadius" Value="5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="350"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Grid.RowSpan" Value="2"/>
+            <Setter Property="Margin" Value="10, 30, 0, 0"/>
+            
+        </Style>
+        
+        <!--Nav Button-->
+        <Style x:Key="navButton" TargetType="Button" BasedOn="{StaticResource hoverButton}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="135"/>
+            
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        
+        <!--Nav Button Grid-->
+        <Style x:Key="navButtonGrid" TargetType="Grid">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="135"/>
+            
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+         </Style>
+        
         <!--Nav Links-->
         <Style x:Key="navText" TargetType="Label">
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
 
-            <Setter Property="Margin" Value="30,-3,10,0"/>
+            <Setter Property="Margin" Value="50, -2, 0, 0"/>
 
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Background" Value="{x:Null}"/>
             <Setter Property="FontFamily" Value="/Cloaks+;component/Assets/fonts/Louis George Cafe.ttf #Louis George Café"/>
         </Style>
 
@@ -218,18 +248,12 @@
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         </Style>
 
-        <!--Nav-->
-        <Style x:Key="nav" TargetType="Border">
-            <Setter Property="VerticalAlignment" Value="Top"/>
-        </Style>
-
-
-        <!--Dialouge Title Bar-->
+        <!--Dialogue Title Bar-->
         <Style x:Key="dialogueWindowTitleBar" TargetType="Border" BasedOn="{StaticResource windowTitleBar}">
-            <Setter Property="Width" Value="404"/>
+            <Setter Property="Width" Value="400"/>
             <Setter Property="Height" Value="38"/>
-            <Setter Property="Margin" Value="0, -2, 2, 0"/>
-            <Setter Property="CornerRadius" Value="5,5,0,0"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="CornerRadius" Value="5, 5, 0, 0"/>
         </Style>
     </Application.Resources>
 </Application>

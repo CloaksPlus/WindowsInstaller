@@ -19,7 +19,7 @@ namespace Cloaks
     public partial class MainWindow : Window
     {
         // Animation 
-        readonly Animator animator = new Animator();
+        private readonly Animator animator = new Animator();
 
         // Updater 
         private static readonly string VERSION_LINK = "https://api.github.com/repos/CloaksPlus/NewInstaller/releases/latest";
@@ -149,7 +149,7 @@ namespace Cloaks
             this);
         }
 
-        /* ANIMATION */
+        ///* ANIMATION */
 
         private void Cloaks_Loaded(object sender, RoutedEventArgs e)
         {
@@ -157,11 +157,7 @@ namespace Cloaks
             animator.Fade(TopBorder);
             animator.Fade(SelectFrame);
 
-            animator.ObjectShift(MainBorder, MainBorder.Margin, new Thickness(0, 0, 0, 0));
-            animator.ObjectShift(TopBorder, TopBorder.Margin, new Thickness(-2, -2, -2, 0));
-            animator.ObjectShift(SelectFrame, TopBorder.Margin, new Thickness(28, 30.5, 0, 0));
-            animator.ObjectShift(HomeFrame, HomeFrame.Margin, new Thickness(160, 45, 20, 0));
-
+            Activate();
         }
 
         /* WINDOW INTERACTIONS */
@@ -260,16 +256,7 @@ namespace Cloaks
             animator.FadeOut(MainBorder);
             animator.FadeOut(TopBorder);
             animator.FadeOut(SelectFrame);
-            animator.ObjectShift(MainBorder, MainBorder.Margin, new Thickness(49, 70, 49, 26));
-            animator.ObjectShift(TopBorder, TopBorder.Margin, new Thickness(0, -28, 0, 0));
-            animator.ObjectShift(SelectFrame, SelectFrame.Margin, new Thickness(-90, 79, 0, 0));
-            animator.ObjectShift(HomeFrame, HomeFrame.Margin, new Thickness(101, 0, 199, 230));
-            await Task.Delay(1000);
-            Application.Current.Shutdown();
-            await Task.Delay(1000);
-            System.Windows.Forms.Application.Exit();
-            await Task.Delay(1000);
-            System.Windows.Forms.Application.ExitThread();
+            await Task.Delay(600);
             Environment.Exit(0);
         }
 
