@@ -21,7 +21,9 @@ namespace Cloaks
 
         public static void Show(string title, MainWindow main)
         {
-            new InstallProgress(title).ShowDialog();
+            InstallProgress w = new InstallProgress(title);
+            w.Activate();
+            w.ShowDialog();
             main.Activate();
         }
 

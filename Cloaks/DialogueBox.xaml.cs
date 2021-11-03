@@ -31,6 +31,7 @@ namespace Cloaks
         {
 
             DialogueBox w = new DialogueBox(title, message, false, main, false);
+            w.Activate();
             w.ShowDialog();
 
             return w.result;
@@ -39,6 +40,7 @@ namespace Cloaks
         public static bool ShowError(string title, string message, MainWindow main)
         {
             DialogueBox w = new DialogueBox(title, message, true, main, false);
+            w.Activate();
             w.ShowDialog();
 
             return w.result;
@@ -47,6 +49,7 @@ namespace Cloaks
         public static bool ShowEULA(MainWindow main)
         {
             DialogueBox w = new DialogueBox("Cloaks+ End User License Agreement", @"By clicking 'I Agree' below, you agree to the Cloaks+ End User License Agreement. To view the contents of the agreement, click the 'EULA' button below.", false, main, true);
+            w.Activate();
             w.ShowDialog();
 
             return w.result;
