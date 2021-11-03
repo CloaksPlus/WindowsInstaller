@@ -4,9 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     
-    x:Class="Cloaks.DialogueBox"
+    x:Class="Cloaks.InstallProgress"
     mc:Ignorable="d"
-    Title="Cloaks+ Message" 
+    Title="Cloaks+ Install Prompt" 
     Topmost="False" 
     WindowStartupLocation="CenterScreen"
     WindowStyle="None" 
@@ -35,21 +35,14 @@
                 <!--Window Title Bar-->
                 <Border x:Name="TopBorder" Style="{DynamicResource dialogueWindowTitleBar}" MouseDown="TopBorder_MouseDown">
                     <Grid>
-                        <Label x:Name="WindowTitle" Content="" Style="{DynamicResource windowTitle}"/>
+                        <Label x:Name="Title" Content="" Style="{DynamicResource windowTitle}"/>
                         <Image x:Name="Logo" Source="Assets/logo_transparent.png" Margin="2,0,0,1" HorizontalAlignment="Left" />
-                        <Button Content="&#xE711;" Style="{DynamicResource windowButton}" Margin="1,1,3,0" Click="CloseButton_Click"/>
                     </Grid>
                 </Border>
 
                 <Border x:Name="DialogueContent">
-                    <Grid Margin="0,0,0,15" >
-                        <TextBlock x:Name="DialogueMessage" Style="{DynamicResource frameText}" HorizontalAlignment="Center" Margin="20,50,20,0">
-                            
-                        </TextBlock> 
-
-                        <Button x:Name="OKButton" Content="OK" Style="{DynamicResource hoverButton}" Click="OKButton_Click" Margin="0, 155, 20, 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Height="40"/>
-                        <Button x:Name="CancelButton" Content="Cancel" Style="{DynamicResource hoverButton}" Click="CancelButton_Click" Margin="0, 155, 120, 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Height="40"/>
-                        <Button Opacity="0" Visibility="Collapsed" x:Name="EULAButton" Content="EULA" Style="{DynamicResource hoverButton}" Click="EULAButton_Click" Margin="20, 155, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Height="40"/>
+                    <Grid Margin="10,60,10,10" Height="20">
+                            <ProgressBar x:Name="InstallProgressBar"/>
                     </Grid>
                 </Border>
             </Grid>

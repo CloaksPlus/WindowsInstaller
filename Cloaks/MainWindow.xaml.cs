@@ -70,10 +70,8 @@ namespace Cloaks
 
         private void ThrowError(Exception ex, string action)
         {
-            DialogueBox.ShowErrorWithCallback("Cloaks+ Error!", "Cloaks+ has encountered an error while " + action + ". Please send the error message below to the Discord server.\n\n" + ex.Message + "\nError source: " + ex.Source, (res) =>
-            {
-                Environment.Exit(0);
-            }, this);
+            DialogueBox.ShowError("Cloaks+ Error!", "Cloaks+ has encountered an error while " + action + ". Please send the error message below to the Discord server.\n\n" + ex.Message + "\nError source: " + ex.Source, this);
+            Environment.Exit(0);
         }
 
         /* UPDATE CHECK */
@@ -109,44 +107,41 @@ namespace Cloaks
                 return; // Dont update if the current version is higher (dev build) or equal (up to date)
             }
 
-            DialogueBox.ShowWithCallback("Cloaks+ | Update avaliable", "This version of Cloaks+ is outdated. Please press OK to update.", (res) =>
+            bool res = DialogueBox.Show("Cloaks+ | Update avaliable", "This version of Cloaks+ is outdated. Please press OK to update.", this);
+
+            if (!res)
             {
-                if (!res)
+                Environment.Exit(0);
+                return;
+            }
+
+            try
+            {
+                // Download New Version
+                string fileName = Process.GetCurrentProcess().MainModule.FileName;
+                File.SetAttributes(fileName, FileAttributes.Normal);
+                if (File.Exists(fileName + "_"))
                 {
-                    Environment.Exit(0);
-                    return;
+                    File.SetAttributes(fileName + "_", FileAttributes.Normal);
+                    File.Delete(fileName + "_");
                 }
 
-                try
-                {
-                    // Download New Version
-                    string fileName = Process.GetCurrentProcess().MainModule.FileName;
-                    File.SetAttributes(fileName, FileAttributes.Normal);
-                    if (File.Exists(fileName + "_"))
-                    {
-                        File.SetAttributes(fileName + "_", FileAttributes.Normal);
-                        File.Delete(fileName + "_");
-                    }
+                File.Move(fileName, fileName + "_");
 
-                    File.Move(fileName, fileName + "_");
+                string tempName = Path.GetDirectoryName(fileName) + "\\temp.exe";
+                webClient.Proxy = null;
+                webClient.DownloadFile("" + githubResponse.assets[0].browser_download_url, tempName);
+                File.Move(tempName, fileName);
 
-                    string tempName = Path.GetDirectoryName(fileName) + "\\temp.exe";
-                    webClient.Proxy = null;
-                    webClient.DownloadFile("" + githubResponse.assets[0].browser_download_url, tempName);
-                    File.Move(tempName, fileName);
-
-                    // Start new Process and Terminate the running one
-                    ProcessStartInfo startInfo = new ProcessStartInfo(fileName) { Verb = "runas" };
-                    Process.Start(startInfo);
-                    Environment.Exit(0);
-                }
-                catch (Exception ex)
-                {
-                    ThrowError(ex, "trying to update");
-                }
-
-            },
-            this);
+                // Start new Process and Terminate the running one
+                ProcessStartInfo startInfo = new ProcessStartInfo(fileName) { Verb = "runas" };
+                Process.Start(startInfo);
+                Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                ThrowError(ex, "trying to update");
+            }
         }
 
         ///* ANIMATION */
@@ -214,27 +209,27 @@ namespace Cloaks
 
         private void InstallButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogueBox.ShowEULA((result) =>
+            bool result = DialogueBox.ShowEULA(this);
+
+            if (!result)
             {
+                // If Dialogue was canceled, do nothing
+                return;
+            }
 
-                if (!result)
-                {
-                    // If Dialogue was canceled, do nothing
-                    return;
-                }
+            InstallProgress.Show("Installing", this);
 
-                // If Dialogue was successful try installing
-                taskBarItemInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
-                try
-                {
-                    InstallCloaks();
-                }
-                catch (Exception ex)
-                {
-                    ThrowError(ex, "installing");
-                }
-                taskBarItemInfo.ProgressState = TaskbarItemProgressState.None;
-            }, this);
+            // If Dialogue was successful try installing
+            taskBarItemInfo.ProgressState = TaskbarItemProgressState.Indeterminate;
+            try
+            {
+                InstallCloaks();
+            }
+            catch (Exception ex)
+            {
+                ThrowError(ex, "installing");
+            }
+            taskBarItemInfo.ProgressState = TaskbarItemProgressState.None;
         }
 
         private void UninstallButton_Click(object sender, RoutedEventArgs e)
@@ -333,6 +328,8 @@ namespace Cloaks
 
         private void UninstallCloaks()
         {
+            InstallProgress.Show("Uninstalling", this);
+
             if (!CloaksPlusExists())
             {
                 DialogueBox.Show("Not Found", "Cloaks+ installation was not found on system.", this);

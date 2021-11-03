@@ -90,6 +90,8 @@
                         <TextBlock Style="{DynamicResource frameText}">
                             Cloaks+ is 'use at your own risk' with any third party Minecraft client, and is not guaranteed to work with all versions.
                         </TextBlock>
+                        
+                        
 
                         <Button x:Name="InstallButton" Style="{DynamicResource installButton}" Click="InstallButton_Click"  Margin="-220, 240, 0, 0">
                             <Grid Style="{DynamicResource installButtonGrid}">

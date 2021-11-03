@@ -107,6 +107,9 @@
     <Compile Include="DialogueBox.xaml.cs">
       <DependentUpon>DialogueBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InstallProgress.xaml.cs">
+      <DependentUpon>InstallProgress.xaml</DependentUpon>
+    </Compile>
     <Page Include="CloaksLoad.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +132,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="DialogueBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InstallProgress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -223,7 +230,7 @@
     <Resource Include="Assets\cloaks_plus.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EmbeddedAssemblies\Newtonsoft.Json.dll" />
+    <EmbeddedResource Include="EmbeddedAssemblies\Newtonsoft.Json.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">

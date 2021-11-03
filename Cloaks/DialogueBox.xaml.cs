@@ -7,19 +7,19 @@ namespace Cloaks
 {
     public partial class DialogueBox : Window
     {
-        private Action<bool> callback;
         private string title;
         private string message;
         private bool error;
         private MainWindow main;
         private bool eula;
 
-        private DialogueBox(string title, string message, bool error, Action<bool> callback, MainWindow main, bool eula)
+        private bool result;
+
+        private DialogueBox(string title, string message, bool error, MainWindow main, bool eula)
         {
             this.title = title;
             this.message = message;
             this.error = error;
-            this.callback = callback;
             this.main = main;
             this.eula = eula;
 
@@ -27,34 +27,29 @@ namespace Cloaks
             Hide();
         }
 
-        public static void Show(string title, string message, MainWindow main)
+        public static bool Show(string title, string message, MainWindow main)
         {
-            
-            new DialogueBox(title, message, false, null, main, false).ShowDialog();
+
+            DialogueBox w = new DialogueBox(title, message, false, main, false);
+            w.ShowDialog();
+
+            return w.result;
         }
 
-        public static void ShowWithCallback(string title, string message, Action<bool> callback, MainWindow main)
+        public static bool ShowError(string title, string message, MainWindow main)
         {
-            
-            new DialogueBox(title, message, false, callback, main, false).ShowDialog();
+            DialogueBox w = new DialogueBox(title, message, true, main, false);
+            w.ShowDialog();
+
+            return w.result;
         }
 
-        public static void ShowError(string title, string message, MainWindow main)
+        public static bool ShowEULA(MainWindow main)
         {
-           
-            new DialogueBox(title, message, true, null, main, false).ShowDialog();
-        }
+            DialogueBox w = new DialogueBox("Cloaks+ End User License Agreement", @"By clicking 'I Agree' below, you agree to the Cloaks+ End User License Agreement. To view the contents of the agreement, click the 'EULA' button below.", false, main, true);
+            w.ShowDialog();
 
-        public static void ShowErrorWithCallback(string title, string message, Action<bool> callback, MainWindow main)
-        {
-           
-            new DialogueBox(title, message, true, callback, main, false).ShowDialog();
-        }
-
-        public static void ShowEULA(Action<bool> callback, MainWindow main)
-        {
-          
-            new DialogueBox("Cloaks+ End User License Agreement", @"By clicking 'I Agree' below, you agree to the Cloaks+ End User License Agreement. To view the contents of the agreement, click the 'EULA' button below.", false, callback, main, true).ShowDialog();
+            return w.result;
         }
 
         private void Box_Loaded(object sender, RoutedEventArgs e)
@@ -100,7 +95,8 @@ namespace Cloaks
 
         private void CloseDialogue(bool result)
         {
-            Close();
+            this.result = result;
+
             try
             {
                 main.Show();
@@ -108,7 +104,7 @@ namespace Cloaks
             }
             catch (Exception) { };
 
-            callback?.Invoke(result);
+            Close();
         }
 
         private void EULAButton_Click(object sender, RoutedEventArgs e)
