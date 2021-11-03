@@ -59,7 +59,7 @@
                             <LineBreak />
                             • Massive code refactor
                             <LineBreak />
-                            • Current version is v.1.4
+                            • Current version is v.1.4.3
                         </TextBlock>
                     </Grid>
                 </Border>
@@ -142,7 +142,7 @@
                     </Grid>
                 </Button>
 
-                <Label Content="Cloaks+ v.1.4"  Style="{StaticResource navVersion}"  Margin="3, 0, 0, 3" Width="124" VerticalAlignment="Bottom"/>
+                <Label Content="Cloaks+ v.1.4.3"  Style="{StaticResource navVersion}"  Margin="3, 0, 0, 3" Width="124" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
     </Grid>

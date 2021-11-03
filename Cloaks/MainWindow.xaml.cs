@@ -311,13 +311,20 @@ namespace Cloaks
                 File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
             }
 
+            string message = "Cloaks+ successfully installed!";
+
+            if (CloaksPlusExists())
+            {
+                message = "Cloaks+ installation was successfully repaired!";
+            }
+
             RemoveAllInstallations();
 
             // Append to the end of the file
             using (StreamWriter hosts = File.AppendText(HOSTS_PATH))
             {
                 hosts.WriteLine("\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
-                DialogueBox.Show("Cloaks+", "Cloaks+ successfully installed!", this);
+                DialogueBox.Show("Cloaks+", message, this);
             }
             File.SetAttributes(HOSTS_PATH, FileAttributes.ReadOnly | FileAttributes.System);
 
