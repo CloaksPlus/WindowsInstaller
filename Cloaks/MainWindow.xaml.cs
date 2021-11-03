@@ -57,10 +57,7 @@ namespace Cloaks
                 newWindowThread.IsBackground = true;
                 newWindowThread.Start();
 
-
-
                 updateHandle.WaitOne();
-
             }
             catch (Exception ex)
             {
@@ -101,7 +98,7 @@ namespace Cloaks
 
             int versionComapre = currentVersion.CompareTo(latestVersion);
 
-            if (versionComapre > 0 || versionComapre == 0 || (bool) githubResponse.prerelease || (bool)githubResponse.draft)
+            if (versionComapre > 0 || versionComapre == 0 || (bool)githubResponse.prerelease || (bool)githubResponse.draft)
             {
                 updateHandle.Set();
                 return; // Dont update if the current version is higher (dev build) or equal (up to date)

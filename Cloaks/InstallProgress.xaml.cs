@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Cloaks
@@ -61,6 +61,6 @@ namespace Cloaks
         }
     }
 
-    
+
 
 }
