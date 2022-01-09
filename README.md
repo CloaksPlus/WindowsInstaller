@@ -23,6 +23,7 @@ The Cloaks+ Installer's last update has been released on *09/01/2021*
   
 
 - Massive Code Refactor 🚜
+- Updated the TOU & License to follow Cloaks+ as a legal entity.
 
   
 
