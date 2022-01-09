@@ -2,7 +2,7 @@
 
   
 
-Current Installer used by Cloaks+
+Current Installer used by Cloaks+, LLC.
 
   
 
@@ -18,7 +18,7 @@ Current Installer used by Cloaks+
 
 ## 📃 Changelog
 
-The Cloaks+ Installer's last update has been released on *11/02/2021*
+The Cloaks+ Installer's last update has been released on *09/01/2021*
 
   
 
@@ -30,7 +30,7 @@ The Cloaks+ Installer's last update has been released on *11/02/2021*
 
   
 
-As stated in the [Terms of Use](https://github.com/CloaksPlus/NewInstaller/blob/master/TOU.md), please contact a CloaksPlus™ developer is order to contribute to this repository.
+As stated in the [Terms of Use](https://github.com/CloaksPlus/NewInstaller/blob/master/TOU.md), please contact a Cloaks+, LLC. developer is order to contribute to this repository.
 
   
 
