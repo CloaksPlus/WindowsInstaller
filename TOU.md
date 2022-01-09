@@ -1,4 +1,4 @@
-# Cloaks+, LLC. Installer Terms of Use
+# Cloaks+, LLC. Installer Terms of Use 
 
 This code is provided publicy for review but is stricty provided with ***All Rights Reserved by Cloaks+, LLC.***. You cannot modify or redistribute this code without ***explicit*** permission from a Cloaks+, LLC. Executive (e.g. an Official Manager, Executive or Owner).
 
