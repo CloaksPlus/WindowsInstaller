@@ -32,6 +32,9 @@ namespace Cloaks
         // Frame Link Colors
         private static readonly Color HighlightColor = Color.FromArgb(0xFF, 0x43, 0x43, 0x43);
         private static readonly Color DarkColor = Color.FromArgb(0xFF, 0x1C, 0x1C, 0x1C);
+        
+        // Log Dir
+        private static readonly string LOG_DIR = Environment.GetEnvironmentVariable("APPDATA") + "\\Cloaks+\\logs";
 
         AutoResetEvent updateHandle = new AutoResetEvent(false);
 
@@ -43,7 +46,11 @@ namespace Cloaks
                 Close();
                 Environment.Exit(0);
             }
-
+            
+            // Ensure Log Directory and clear latest
+            Directory.CreateDirectory(LOG_DIR);
+            File.WriteAllText(LOG_DIR + "\\latest.log","");
+            
             try
             {
                 InitializeComponent();
@@ -70,13 +77,7 @@ namespace Cloaks
         private void ThrowError(Exception ex, string action)
         {
             // Write Logs
-            string logDir = Environment.GetEnvironmentVariable("APPDATA") + "\\Cloaks+\\logs";
-            Directory.CreateDirectory(logDir);
-
-            File.WriteAllText(logDir + "\\latest.log", ex.Message + "\n");
-            File.WriteAllText(logDir + "\\latest.log", ex.Source + "\n");
-            File.WriteAllText(logDir + "\\latest.log", ex.StackTrace + "\n");
-            File.WriteAllText(logDir + "\\latest.log", ex.ToString() + "\n");
+            File.WriteAllText(LOG_DIR + "\\latest.log", ex + "\n");
 
             DialogueBox.ShowError("Cloaks+ Error!",
                 "Cloaks+ has encountered an error while " + action +
@@ -319,8 +320,7 @@ namespace Cloaks
             }
 
             File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
-
-
+            
             string message = "Cloaks+ successfully installed!";
 
             if (CloaksPlusExists())
@@ -349,7 +349,7 @@ namespace Cloaks
                 DialogueBox.Show("Not Found", "Cloaks+ installation was not found on system.", this);
                 return;
             }
-
+    
             File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
 
             RemoveAllInstallations();
