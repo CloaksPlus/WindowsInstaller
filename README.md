@@ -18,12 +18,12 @@ Current Installer used by Cloaks+, LLC.
 
 ## 📃 Changelog
 
-The Cloaks+ Installer's last update has been released on *09/01/2021*
+The Cloaks+ Installer's last update has been released on *1/29/2022*
 
-  
+  ### Version 1.4.4
 
-- Massive Code Refactor 🚜
-- Updated the TOU & License to follow Cloaks+ as a legal entity.
+- Bug fix with `mscorlib`
+- Log system for error reporting
 
   
 
