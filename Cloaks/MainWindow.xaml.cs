@@ -32,7 +32,7 @@ namespace Cloaks
         // Frame Link Colors
         private static readonly Color HighlightColor = Color.FromArgb(0xFF, 0x43, 0x43, 0x43);
         private static readonly Color DarkColor = Color.FromArgb(0xFF, 0x1C, 0x1C, 0x1C);
-        
+
         // Log Dir
         private static readonly string LOG_DIR = Environment.GetEnvironmentVariable("APPDATA") + "\\Cloaks+\\logs";
 
@@ -46,11 +46,11 @@ namespace Cloaks
                 Close();
                 Environment.Exit(0);
             }
-            
+
             // Ensure Log Directory and clear latest
             Directory.CreateDirectory(LOG_DIR);
-            File.WriteAllText(LOG_DIR + "\\latest.log","");
-            
+            File.WriteAllText(LOG_DIR + "\\latest.log", "");
+
             try
             {
                 InitializeComponent();
@@ -311,6 +311,48 @@ namespace Cloaks
 
         private void InstallCloaks()
         {
+            // Auto change optifine settings to show capes
+            try
+            {
+                string ofOptionsPath = Environment.GetEnvironmentVariable("APPDATA") + "\\.minecraft\\optionsof.txt";
+
+                var ofOptions = File.ReadAllLines(ofOptionsPath);
+                for (int i = 0; i < ofOptions.Length; i++)
+                {
+                    if (ofOptions[i].StartsWith("ofShowCapes"))
+                    {
+                        ofOptions[i] = "ofShowCapes:true";
+                    }
+                }
+
+                File.WriteAllLines(ofOptionsPath, ofOptions);
+            }
+            catch (Exception ex)
+            {
+                ThrowError(ex, "configuring Optifine settings");
+            }
+
+            // Auto change vanilla cape settings to show capes
+            try
+            {
+                string optionsPath = Environment.GetEnvironmentVariable("APPDATA") + "\\.minecraft\\options.txt";
+
+                var options = File.ReadAllLines(optionsPath);
+                for (int i = 0; i < options.Length; i++)
+                {
+                    if (options[i].StartsWith("modelPart_cape"))
+                    {
+                        options[i] = "modelPart_cape:true";
+                    }
+                }
+
+                File.WriteAllLines(optionsPath, options);
+            }
+            catch (Exception ex)
+            {
+                ThrowError(ex, "configuring Minecraft settings");
+            }
+
             // Check if the hosts file exists at all
             if (!File.Exists(HOSTS_PATH))
             {
@@ -320,7 +362,7 @@ namespace Cloaks
             }
 
             File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
-            
+
             string message = "Cloaks+ successfully installed!";
 
             if (CloaksPlusExists())
@@ -349,7 +391,7 @@ namespace Cloaks
                 DialogueBox.Show("Not Found", "Cloaks+ installation was not found on system.", this);
                 return;
             }
-    
+
             File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
 
             RemoveAllInstallations();
