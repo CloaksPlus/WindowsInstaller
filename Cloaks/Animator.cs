@@ -10,21 +10,16 @@ namespace Cloaks
         private static readonly TimeSpan FULL_SECOND = TimeSpan.FromMilliseconds(1000);
 
         private readonly Storyboard StoryBoard = new Storyboard();
+        private IEasingFunction Smooth { get; set; }
 
         public Animator()
         {
-
-        }
-
-        private IEasingFunction Smooth
-        {
-            get;
-            set;
-        }
-            = new QuarticEase
+            Smooth = new QuarticEase()
             {
                 EasingMode = EasingMode.EaseInOut
             };
+        }
+
 
         public void Fade(DependencyObject Object)
         {
@@ -69,5 +64,4 @@ namespace Cloaks
             StoryBoard.Begin();
         }
     }
-
 }

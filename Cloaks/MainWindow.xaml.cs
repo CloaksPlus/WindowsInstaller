@@ -22,10 +22,12 @@ namespace Cloaks
         private readonly Animator animator = new Animator();
 
         // Updater 
-        private static readonly string VERSION_LINK = "https://api.github.com/repos/CloaksPlus/NewInstaller/releases/latest";
+        private static readonly string VERSION_LINK =
+            "https://api.github.com/repos/CloaksPlus/NewInstaller/releases/latest";
 
         // Hosts
-        private static readonly string HOSTS_PATH = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "drivers/etc/hosts");
+        private static readonly string HOSTS_PATH =
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "drivers/etc/hosts");
 
         // Frame Link Colors
         private static readonly Color HighlightColor = Color.FromArgb(0xFF, 0x43, 0x43, 0x43);
@@ -67,7 +69,19 @@ namespace Cloaks
 
         private void ThrowError(Exception ex, string action)
         {
-            DialogueBox.ShowError("Cloaks+ Error!", "Cloaks+ has encountered an error while " + action + ". Please send the error message below to the Discord server.\n\n" + ex.Message + "\nError source: " + ex.Source, this);
+            // Write Logs
+            string logDir = Environment.GetEnvironmentVariable("APPDATA") + "\\Cloaks+\\logs";
+            Directory.CreateDirectory(logDir);
+
+            File.WriteAllText(logDir + "\\latest.log", ex.Message + "\n");
+            File.WriteAllText(logDir + "\\latest.log", ex.Source + "\n");
+            File.WriteAllText(logDir + "\\latest.log", ex.StackTrace + "\n");
+            File.WriteAllText(logDir + "\\latest.log", ex.ToString() + "\n");
+
+            DialogueBox.ShowError("Cloaks+ Error!",
+                "Cloaks+ has encountered an error while " + action +
+                ". Please send the error message below to the Discord server.\n\n" + ex.Message + "\nError source: " +
+                ex.Source, this);
             Environment.Exit(0);
         }
 
@@ -94,17 +108,20 @@ namespace Cloaks
             string githubVersion = "" + githubResponse.tag_name;
 
             Version currentVersion = Assembly.GetExecutingAssembly().GetName().Version;
-            Version latestVersion = new Version(githubVersion.Substring(0, 1) == "v" ? githubVersion.Substring(1) : githubVersion);
+            Version latestVersion =
+                new Version(githubVersion.Substring(0, 1) == "v" ? githubVersion.Substring(1) : githubVersion);
 
             int versionComapre = currentVersion.CompareTo(latestVersion);
 
-            if (versionComapre > 0 || versionComapre == 0 || (bool)githubResponse.prerelease || (bool)githubResponse.draft)
+            if (versionComapre > 0 || versionComapre == 0 || (bool) githubResponse.prerelease ||
+                (bool) githubResponse.draft)
             {
                 updateHandle.Set();
                 return; // Dont update if the current version is higher (dev build) or equal (up to date)
             }
 
-            bool res = DialogueBox.Show("Cloaks+ | Update avaliable", "This version of Cloaks+ is outdated. Please press OK to update.", this);
+            bool res = DialogueBox.Show("Cloaks+ | Update avaliable",
+                "This version of Cloaks+ is outdated. Please press OK to update.", this);
 
             if (!res)
             {
@@ -131,7 +148,7 @@ namespace Cloaks
                 File.Move(tempName, fileName);
 
                 // Start new Process and Terminate the running one
-                ProcessStartInfo startInfo = new ProcessStartInfo(fileName) { Verb = "runas" };
+                ProcessStartInfo startInfo = new ProcessStartInfo(fileName) {Verb = "runas"};
                 Process.Start(startInfo);
                 Environment.Exit(0);
             }
@@ -142,7 +159,6 @@ namespace Cloaks
         }
 
         ///* ANIMATION */
-
         private void Cloaks_Loaded(object sender, RoutedEventArgs e)
         {
             animator.Fade(MainBorder);
@@ -226,6 +242,7 @@ namespace Cloaks
             {
                 ThrowError(ex, "installing");
             }
+
             taskBarItemInfo.ProgressState = TaskbarItemProgressState.None;
         }
 
@@ -271,12 +288,6 @@ namespace Cloaks
             }
         }
 
-        private bool HostsIsReadonly()
-        {
-            FileInfo file = new FileInfo(HOSTS_PATH);
-            return file.IsReadOnly;
-        }
-
         public static bool IsAdministrator()
         {
             WindowsIdentity identity = WindowsIdentity.GetCurrent();
@@ -290,7 +301,8 @@ namespace Cloaks
             string OPTIFINE_URL = "s.optifine.net";
             string OLD_CLOAKS_MARKER = "INSERTED BY CLOAKS+";
             var hostsContent = File.ReadAllLines(HOSTS_PATH);
-            var validLines = hostsContent.Where(line => !(line.Contains(OPTIFINE_URL) || line.Contains(OLD_CLOAKS_MARKER)));
+            var validLines =
+                hostsContent.Where(line => !(line.Contains(OPTIFINE_URL) || line.Contains(OLD_CLOAKS_MARKER)));
             File.WriteAllLines(HOSTS_PATH, validLines);
         }
 
@@ -306,10 +318,8 @@ namespace Cloaks
                 return;
             }
 
-            if (HostsIsReadonly())
-            {
-                File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
-            }
+            File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
+
 
             string message = "Cloaks+ successfully installed!";
 
@@ -326,8 +336,8 @@ namespace Cloaks
                 hosts.WriteLine("\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
                 DialogueBox.Show("Cloaks+", message, this);
             }
-            File.SetAttributes(HOSTS_PATH, FileAttributes.ReadOnly | FileAttributes.System);
 
+            File.SetAttributes(HOSTS_PATH, FileAttributes.ReadOnly | FileAttributes.System);
         }
 
         private void UninstallCloaks()
@@ -340,10 +350,7 @@ namespace Cloaks
                 return;
             }
 
-            if (HostsIsReadonly())
-            {
-                File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
-            }
+            File.SetAttributes(HOSTS_PATH, FileAttributes.Normal);
 
             RemoveAllInstallations();
             DialogueBox.Show("Cloaks+", "Cloaks+ successfully uninstalled!", this);
