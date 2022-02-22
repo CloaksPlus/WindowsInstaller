@@ -49,7 +49,7 @@
 
                         <Button x:Name="OKButton" Content="OK" Style="{DynamicResource hoverButton}" Click="OKButton_Click" Margin="0, 155, 20, 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Height="40"/>
                         <Button x:Name="CancelButton" Content="Cancel" Style="{DynamicResource hoverButton}" Click="CancelButton_Click" Margin="0, 155, 120, 0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="90" Height="40"/>
-                        <Button Opacity="0" Visibility="Collapsed" x:Name="EULAButton" Content="EULA" Style="{DynamicResource hoverButton}" Click="EULAButton_Click" Margin="20, 155, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Height="40"/>
+                        <Button Opacity="0" Visibility="Collapsed" x:Name="TermsButton" Content="Terms" Style="{DynamicResource hoverButton}" Click="TermsButton_Click" Margin="20, 155, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="90" Height="40"/>
                     </Grid>
                 </Border>
             </Grid>

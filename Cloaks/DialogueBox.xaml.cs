@@ -46,9 +46,9 @@ namespace Cloaks
             return w.result;
         }
 
-        public static bool ShowEULA(MainWindow main)
+        public static bool ShowTOU(MainWindow main)
         {
-            DialogueBox w = new DialogueBox("Cloaks+ End User License Agreement", @"By clicking 'I Agree' below, you agree to the Cloaks+ End User License Agreement. To view the contents of the agreement, click the 'EULA' button below.", false, main, true);
+            DialogueBox w = new DialogueBox("Cloaks+ Terms and Conditions of Use", @"By clicking 'I Agree' below, you agree to the Cloaks+ Terms and Conditions of Use. To view the contents of the agreement, click the 'Terms' button below.", false, main, true);
             w.Activate();
             w.ShowDialog();
 
@@ -61,8 +61,8 @@ namespace Cloaks
             DialogueMessage.Text = message;
             if (eula)
             {
-                EULAButton.Opacity = 100;
-                EULAButton.Visibility = Visibility.Visible;
+                TermsButton.Opacity = 100;
+                TermsButton.Visibility = Visibility.Visible;
                 OKButton.Content = "I Agree";
             }
 
@@ -110,7 +110,7 @@ namespace Cloaks
             Close();
         }
 
-        private void EULAButton_Click(object sender, RoutedEventArgs e)
+        private void TermsButton_Click(object sender, RoutedEventArgs e)
         {
             Process.Start("https://cloaksplus.com/terms");
         }

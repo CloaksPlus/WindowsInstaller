@@ -223,7 +223,7 @@ namespace Cloaks
 
         private void InstallButton_Click(object sender, RoutedEventArgs e)
         {
-            bool result = DialogueBox.ShowEULA(this);
+            bool result = DialogueBox.ShowTOU(this);
 
             if (!result)
             {

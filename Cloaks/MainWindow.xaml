@@ -57,9 +57,9 @@
                             Recent Updates:
                             <LineBreak />
                             <LineBreak />
-                            • Automatically configure cape settings
+                            • Update to Terms of Use
                             <LineBreak />
-                            • Current version is v.1.4.5
+                            • Current version is v.1.4.6
                         </TextBlock>
                     </Grid>
                 </Border>
@@ -91,7 +91,6 @@
                             Cloaks+ is 'use at your own risk' with any third party Minecraft client, and is not guaranteed to work with all versions.
                         </TextBlock>
                         
-                        
 
                         <Button x:Name="InstallButton" Style="{DynamicResource installButton}" Click="InstallButton_Click"  Margin="-220, 240, 0, 0">
                             <Grid Style="{DynamicResource installButtonGrid}">
@@ -108,10 +107,6 @@
                         </Button>
                     </Grid>
                 </Border>
-                
-                
-
-                
             </Grid>
         </Border>
 
@@ -142,7 +137,7 @@
                     </Grid>
                 </Button>
 
-                <Label Content="Cloaks+ v.1.4.5"  Style="{StaticResource navVersion}"  Margin="3, 0, 0, 3" Width="124" VerticalAlignment="Bottom"/>
+                <Label Content="Cloaks+ v.1.4.6"  Style="{StaticResource navVersion}"  Margin="3, 0, 0, 3" Width="124" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
     </Grid>
