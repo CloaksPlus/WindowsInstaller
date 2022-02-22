@@ -14,6 +14,9 @@ Current Installer used by Cloaks+, LLC.
 
 The Cloaks+ Installer's last update has been released on *1/30/2022*
 
+### Version 1.4.6
+- Update EULA to TOU
+
 ### Version 1.4.5
 - Automatically configure cape settings
 
