@@ -9,6 +9,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shell;
@@ -315,17 +316,19 @@ namespace Cloaks
             try
             {
                 string ofOptionsPath = Environment.GetEnvironmentVariable("APPDATA") + "\\.minecraft\\optionsof.txt";
-
-                var ofOptions = File.ReadAllLines(ofOptionsPath);
-                for (int i = 0; i < ofOptions.Length; i++)
+                if (File.Exists(ofOptionsPath))
                 {
-                    if (ofOptions[i].StartsWith("ofShowCapes"))
+                    var ofOptions = File.ReadAllLines(ofOptionsPath);
+                    for (int i = 0; i < ofOptions.Length; i++)
                     {
-                        ofOptions[i] = "ofShowCapes:true";
+                        if (ofOptions[i].StartsWith("ofShowCapes"))
+                        {
+                            ofOptions[i] = "ofShowCapes:true";
+                        }
                     }
-                }
 
-                File.WriteAllLines(ofOptionsPath, ofOptions);
+                    File.WriteAllLines(ofOptionsPath, ofOptions);
+                }
             }
             catch (Exception ex)
             {
@@ -337,16 +340,19 @@ namespace Cloaks
             {
                 string optionsPath = Environment.GetEnvironmentVariable("APPDATA") + "\\.minecraft\\options.txt";
 
-                var options = File.ReadAllLines(optionsPath);
-                for (int i = 0; i < options.Length; i++)
+                if (File.Exists(optionsPath))
                 {
-                    if (options[i].StartsWith("modelPart_cape"))
+                    var options = File.ReadAllLines(optionsPath);
+                    for (int i = 0; i < options.Length; i++)
                     {
-                        options[i] = "modelPart_cape:true";
+                        if (options[i].StartsWith("modelPart_cape"))
+                        {
+                            options[i] = "modelPart_cape:true";
+                        }
                     }
-                }
 
-                File.WriteAllLines(optionsPath, options);
+                    File.WriteAllLines(optionsPath, options); 
+                }
             }
             catch (Exception ex)
             {

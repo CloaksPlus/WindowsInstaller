@@ -137,7 +137,7 @@
                     </Grid>
                 </Button>
 
-                <Label Content="Cloaks+ v.1.4.6.1"  Style="{StaticResource navVersion}"  Margin="3, 0, 0, 3" Width="124" VerticalAlignment="Bottom"/>
+                <Label Content="Cloaks+ v.1.4.6.2"  Style="{StaticResource navVersion}"  Margin="3, 0, 0, 3" Width="124" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
     </Grid>
