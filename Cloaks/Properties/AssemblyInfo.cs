@@ -19,5 +19,5 @@ using System.Windows;
 )]
 
 
-[assembly: AssemblyVersion("1.4.6.2")]
-[assembly: AssemblyFileVersion("1.4.6.2")]
+[assembly: AssemblyVersion("1.4.7")]
+[assembly: AssemblyFileVersion("1.4.7")]
