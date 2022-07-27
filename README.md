@@ -14,6 +14,10 @@ Current Installer used by Cloaks+, LLC.
 
 The Cloaks+ Installer's last update has been released on *1/30/2022*
 
+### Version 1.5.0
+- Fix Lunar compatibility
+- Swallow exception if can't overwrite options
+
 ### Version 1.4.6
 - Update EULA to TOU
 
