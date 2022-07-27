@@ -7,7 +7,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Cloaks+")]
 [assembly: AssemblyProduct("Cloaks")]
-[assembly: AssemblyCopyright("Copyright © Cloaks+ 2021")]
+[assembly: AssemblyCopyright("Copyright © Cloaks+ 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,5 +19,5 @@ using System.Windows;
 )]
 
 
-[assembly: AssemblyVersion("1.4.7")]
-[assembly: AssemblyFileVersion("1.4.7")]
+[assembly: AssemblyVersion("1.5.0")]
+[assembly: AssemblyFileVersion("1.5.0")]

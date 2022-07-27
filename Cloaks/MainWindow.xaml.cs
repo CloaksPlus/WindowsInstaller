@@ -282,7 +282,8 @@ namespace Cloaks
         {
             try
             {
-                return File.ReadAllText(HOSTS_PATH).Contains("161.35.130.99 s.optifine.net");
+                string hostsContents = File.ReadAllText(HOSTS_PATH);
+                return hostsContents.Contains("161.35.130.99 s.optifine.net") && hostsContents.Contains("161.35.130.99 s-optifine.lunarclientcdn.com");
             }
             catch (Exception)
             {
@@ -302,9 +303,10 @@ namespace Cloaks
             // Filter our all lines with "s.optifine.net" (or old Cloaks+ content) and write the valid lines back
             string OPTIFINE_URL = "s.optifine.net";
             string OLD_CLOAKS_MARKER = "INSERTED BY CLOAKS+";
+            string LUNAR_OPTIFINE_CDN = "s-optifine.lunarclientcdn.com";
             var hostsContent = File.ReadAllLines(HOSTS_PATH);
             var validLines =
-                hostsContent.Where(line => !(line.Contains(OPTIFINE_URL) || line.Contains(OLD_CLOAKS_MARKER)));
+                hostsContent.Where(line => !(line.Contains(OPTIFINE_URL) || line.Contains(OLD_CLOAKS_MARKER) || line.Contains(LUNAR_OPTIFINE_CDN)));
             File.WriteAllLines(HOSTS_PATH, validLines);
         }
 
@@ -332,7 +334,7 @@ namespace Cloaks
             }
             catch (Exception ex)
             {
-                ThrowError(ex, "configuring Optifine settings");
+                File.WriteAllText(LOG_DIR + "\\latest.log", ex + "\n");
             }
 
             // Auto change vanilla cape settings to show capes
@@ -351,18 +353,20 @@ namespace Cloaks
                         }
                     }
 
-                    File.WriteAllLines(optionsPath, options); 
+                    File.WriteAllLines(optionsPath, options);
                 }
             }
             catch (Exception ex)
             {
-                ThrowError(ex, "configuring Minecraft settings");
+                File.WriteAllText(LOG_DIR + "\\latest.log", ex + "\n");
             }
 
             // Check if the hosts file exists at all
             if (!File.Exists(HOSTS_PATH))
             {
-                File.WriteAllText(HOSTS_PATH, "\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
+                string fileContents =
+                    "\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+\n161.35.130.99 s-optifine.lunarclientcdn.com # LINE INSERTED BY CLOAKS+";
+                File.WriteAllText(HOSTS_PATH, fileContents);
                 DialogueBox.Show("Cloaks+", "Cloaks+ successfully installed!", this);
                 return;
             }
@@ -382,6 +386,7 @@ namespace Cloaks
             using (StreamWriter hosts = File.AppendText(HOSTS_PATH))
             {
                 hosts.WriteLine("\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
+                hosts.WriteLine("161.35.130.99 s-optifine.lunarclientcdn.com # LINE INSERTED BY CLOAKS+");
                 DialogueBox.Show("Cloaks+", message, this);
             }
 
