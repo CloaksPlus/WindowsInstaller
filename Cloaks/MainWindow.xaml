@@ -59,7 +59,7 @@
                             <LineBreak />
                             • Fix compatibility on some clients
                             <LineBreak />
-                            • Current version is v.1.5.1
+                            • Current version is v1.5.1
                         </TextBlock>
                     </Grid>
                 </Border>
@@ -137,7 +137,7 @@
                     </Grid>
                 </Button>
 
-                <Label Content="Cloaks+ v.1.5.1"  Style="{StaticResource navVersion}"  Margin="3, 0, 0, 3" Width="124" VerticalAlignment="Bottom"/>
+                <Label Content="Cloaks+ v1.5.1"  Style="{StaticResource navVersion}"  Margin="3, 0, 0, 3" Width="124" VerticalAlignment="Bottom"/>
             </Grid>
         </Border>
     </Grid>
