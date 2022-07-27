@@ -283,7 +283,8 @@ namespace Cloaks
             try
             {
                 string hostsContents = File.ReadAllText(HOSTS_PATH);
-                return hostsContents.Contains("161.35.130.99 s.optifine.net") && hostsContents.Contains("161.35.130.99 s-optifine.lunarclientcdn.com");
+                return hostsContents.Contains("161.35.130.99 s.optifine.net") &&
+                       hostsContents.Contains("161.35.130.99 s-optifine.lunarclientcdn.com");
             }
             catch (Exception)
             {
@@ -306,8 +307,11 @@ namespace Cloaks
             string LUNAR_OPTIFINE_CDN = "s-optifine.lunarclientcdn.com";
             var hostsContent = File.ReadAllLines(HOSTS_PATH);
             var validLines =
-                hostsContent.Where(line => !(line.Contains(OPTIFINE_URL) || line.Contains(OLD_CLOAKS_MARKER) || line.Contains(LUNAR_OPTIFINE_CDN)));
-            File.WriteAllLines(HOSTS_PATH, validLines);
+                hostsContent.Where(line =>
+                    !(line.Contains(OPTIFINE_URL) || line.Contains(OLD_CLOAKS_MARKER) ||
+                      line.Contains(LUNAR_OPTIFINE_CDN)));
+
+            File.WriteAllText(HOSTS_PATH, String.Join("\n", validLines).Trim() + "\n");
         }
 
         /* PROGRAM LOGIC */
@@ -364,10 +368,12 @@ namespace Cloaks
             // Check if the hosts file exists at all
             if (!File.Exists(HOSTS_PATH))
             {
-                string fileContents =
-                    "\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+\n161.35.130.99 s-optifine.lunarclientcdn.com # LINE INSERTED BY CLOAKS+";
-                File.WriteAllText(HOSTS_PATH, fileContents);
-                DialogueBox.Show("Cloaks+", "Cloaks+ successfully installed!", this);
+                using (StreamWriter hosts = File.AppendText(HOSTS_PATH))
+                {
+                    hosts.WriteLine("161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
+                    hosts.WriteLine("161.35.130.99 s-optifine.lunarclientcdn.com # LINE INSERTED BY CLOAKS+");
+                    DialogueBox.Show("Cloaks+", "Cloaks+ successfully installed!", this);
+                }
                 return;
             }
 
@@ -385,7 +391,8 @@ namespace Cloaks
             // Append to the end of the file
             using (StreamWriter hosts = File.AppendText(HOSTS_PATH))
             {
-                hosts.WriteLine("\n161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
+                hosts.WriteLine();
+                hosts.WriteLine("161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
                 hosts.WriteLine("161.35.130.99 s-optifine.lunarclientcdn.com # LINE INSERTED BY CLOAKS+");
                 DialogueBox.Show("Cloaks+", message, this);
             }
