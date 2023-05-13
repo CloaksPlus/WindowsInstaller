@@ -303,13 +303,14 @@ namespace Cloaks
         {
             // Filter our all lines with "s.optifine.net" (or old Cloaks+ content) and write the valid lines back
             string OPTIFINE_URL = "s.optifine.net";
+            string ALT_OPTIFINE_URL = "s-optifine.net";
             string OLD_CLOAKS_MARKER = "INSERTED BY CLOAKS+";
             string LUNAR_OPTIFINE_CDN = "s-optifine.lunarclientcdn.com";
             var hostsContent = File.ReadAllLines(HOSTS_PATH);
             var validLines =
                 hostsContent.Where(line =>
                     !(line.Contains(OPTIFINE_URL) || line.Contains(OLD_CLOAKS_MARKER) ||
-                      line.Contains(LUNAR_OPTIFINE_CDN)));
+                      line.Contains(LUNAR_OPTIFINE_CDN) || line.Contains(ALT_OPTIFINE_URL)));
 
             File.WriteAllText(HOSTS_PATH, String.Join("\n", validLines).Trim() + "\n");
         }
@@ -371,6 +372,7 @@ namespace Cloaks
                 using (StreamWriter hosts = File.AppendText(HOSTS_PATH))
                 {
                     hosts.WriteLine("161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
+                    hosts.WriteLine("161.35.130.99 s-optifine.net # LINE INSERTED BY CLOAKS+");
                     hosts.WriteLine("161.35.130.99 s-optifine.lunarclientcdn.com # LINE INSERTED BY CLOAKS+");
                     DialogueBox.Show("Cloaks+", "Cloaks+ successfully installed!", this);
                 }
@@ -393,6 +395,7 @@ namespace Cloaks
             {
                 hosts.WriteLine();
                 hosts.WriteLine("161.35.130.99 s.optifine.net # LINE INSERTED BY CLOAKS+");
+                hosts.WriteLine("161.35.130.99 s-optifine.net # LINE INSERTED BY CLOAKS+");
                 hosts.WriteLine("161.35.130.99 s-optifine.lunarclientcdn.com # LINE INSERTED BY CLOAKS+");
                 DialogueBox.Show("Cloaks+", message, this);
             }
