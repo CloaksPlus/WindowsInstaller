@@ -31,7 +31,7 @@ The Cloaks+ Installer's last update has been released on *7/27/2022*
 
 ## 🤝🏻 Contributing
 
-As stated in the [Terms of Use](https://github.com/CloaksPlus/NewInstaller/blob/master/TOU.md), please contact a Cloaks+, LLC. developer is order to contribute to this repository.
+As stated in the [Terms of Use](https://github.com/CloaksPlus/NewInstaller/blob/master/TOU.md), please contact a Cloaks+, LLC. developer in order to contribute to this repository.
 
 ## ⚖ License
 
